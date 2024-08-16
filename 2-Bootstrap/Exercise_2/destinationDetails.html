@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Destination Details</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Travel Database</a>
+
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="report.html">Travel Report</a></li>
+          <li><a href="travelTips.html">Travel Tips</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Travel Details</h2>
+
+      <section id="travelDetail"></section>
+    </main>
+    <!-- <footer></footer> -->
+    <script>
+      let destinationList = [
+        {
+          id: '1',
+          travelDestination: 'Paris',
+          country: 'France',
+          duration: '7 days',
+          highlights: 'Eiffel Tower, Louvre Museum',
+          details: 'A wonderful trip to the romantic city of Paris.',
+        },
+        {
+          id: '2',
+          travelDestination: 'Tokyo',
+          country: 'Japan',
+          duration: '7 days',
+          highlights: 'Tokyo Tower, Meiji Shrine',
+          details:
+            'Experience the beauty of flourishing nature, cultural heritage.',
+        },
+        {
+          id: '3',
+          travelDestination: 'Rome',
+          country: 'Italy',
+          duration: '8 days',
+          highlights: 'Colosseum, Vatican City',
+          details:
+            'Walk through the amazing historical sights of Rome, stunning art, great music and food.',
+        },
+        {
+          id: '4',
+          travelDestination: 'New York City',
+          country: ' Unites States',
+          duration: '13 days',
+          highlights: 'Statue of liberty, Central Park',
+          details: 'Explore the iconic buildings, food culture, parks.',
+        },
+        {
+          id: '5',
+          travelDestination: 'Cape Town',
+          country: 'South Africa',
+          duration: '9 days',
+          highlights: 'table Mountain, Robben Island',
+          details:
+            'Visit iconic mountain ranges, stunning natural wonders and thrilling landscapes.',
+        },
+        {
+          id: '6',
+          travelDestination: 'Sydney',
+          country: 'Australia',
+          duration: '9 days',
+          highlights: 'Sydney Opera House, Bondi Beach',
+          details: 'Experience the beach life, bridges, amazing zoos',
+        },
+      ];
+
+      //get the id from url
+      function getDestinationId(id) {
+        let url = new URL(window.location.href);
+        return url.searchParams.get(id);
+        // console.log(url.searchParams.get(id))
+      }
+      let destinationId = getDestinationId('id');
+
+      //find that id data in db
+      let destinationObj;
+      for (let i = 0; i < destinationList.length; i++) {
+        if (destinationList[i].id === destinationId) {
+          destinationObj = destinationList[i];
+        }
+      }
+
+      //if obj found, view that object on the page
+      let travelDetailElement = document.getElementById('travelDetail');
+
+      if (destinationObj) {
+        travelDetailElement.innerHTML = `
+          <h3>${destinationObj.travelDestination}</h3>
+          <p><strong>Country: </strong>${destinationObj.country}</p>
+          <p><strong>Duration: </strong>${destinationObj.duration}</p>
+          <p><strong>Highlights: </strong>${destinationObj.highlights}</p>
+          <p><strong>Details: </strong>${destinationObj.details}</p>
+      `;
+      } else {
+        travelDetailElement.innerHTML = `
+          <p>Travel details not found<p/>
+      `;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Destination Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  <header>
+
+    <nav class="navbar navbar-expand-lg bg-dark py-3" data-bs-theme="dark">
+      <div class="container">
+        <a href="index.html" class="navbar-brand text-light fw-medium">Travel Database</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a href="index.html" class="nav-link fw-medium">Home</a></li>
+            <li class="nav-item"><a href="destinations.html" class="nav-link fw-medium">Destinations</a>
+            </li>
+            <li class="nav-item"><a href="report.html" class="nav-link w-medium">Travel Report</a></li>
+            <li class="nav-item"><a href="travelTips.html" class="nav-link fw-medium">Travel Tips</a></li>
+          </ul>
+        </div>
+
+    </nav>
+    </div>
+  </header>
+
+  <main class="py-4">
+    <section>
+      <div class="container">
+        <h2 class="mb-4">Travel Details</h2>
+      </div>
+
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <section id="travelDetail">
+
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-dark text-light py-3">
+    <div class="container">
+      <p>&copy; 2024 Travel Company. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    let destinationList = [
+      {
+        id: '1',
+        travelDestination: 'Paris',
+        country: 'France',
+        duration: '7 days',
+        highlights: 'Eiffel Tower, Louvre Museum',
+        details: 'A wonderful trip to the romantic city of Paris.'
+      },
+      {
+        id: '2',
+        travelDestination: 'Tokyo',
+        country: 'Japan',
+        duration: '7 days',
+        highlights: 'Tokyo Tower, Meiji Shrine',
+        details: 'Experience the beauty of flourishing nature, cultural heritage.'
+      },
+      {
+        id: '3',
+        travelDestination: 'Rome',
+        country: 'Italy',
+        duration: '8 days',
+        highlights: 'Colosseum, Vatican City',
+        details: 'Walk through the amazing historical sights of Rome, stunning art, great music and food.'
+      },
+      {
+        id: '4',
+        travelDestination: 'New York City',
+        country: ' Unites States',
+        duration: '13 days',
+        highlights: 'Statue of liberty, Central Park',
+        details: 'Explore the iconic buildings, food culture, parks.'
+      },
+      {
+        id: '5',
+        travelDestination: 'Cape Town',
+        country: 'South Africa',
+        duration: '9 days',
+        highlights: 'table Mountain, Robben Island',
+        details: 'Visit iconic mountain ranges, stunning natural wonders and thrilling landscapes.'
+      },
+      {
+        id: '6',
+        travelDestination: 'Sydney',
+        country: 'Australia',
+        duration: '9 days',
+        highlights: 'Sydney Opera House, Bondi Beach',
+        details: 'Experience the beach life, bridges, amazing zoos'
+      }
+
+    ]
+
+
+    //get the id from url
+    function getDestinationId(id) {
+      let url = new URL(window.location.href)
+      return url.searchParams.get(id)
+      // console.log(url.searchParams.get(id))
+
+    }
+    let destinationId = getDestinationId('id')
+
+    //find that id data in db
+    let destinationObj
+    for (let i = 0; i < destinationList.length; i++) {
+      if (destinationList[i].id === destinationId) {
+        destinationObj = destinationList[i]
+      }
+    }
+
+    //if obj found, view that object on the page
+    let travelDetailElement = document.getElementById('travelDetail')
+
+    if (destinationObj) {
+      travelDetailElement.innerHTML = `
+        <h3 class='card-title'>${destinationObj.travelDestination}</h3>
+        <p><strong>Country: </strong>${destinationObj.country}</p>
+        <p><strong>Duration: </strong>${destinationObj.duration}</p>
+        <p><strong>Highlights: </strong>${destinationObj.highlights}</p>
+        <p><strong>Details: </strong>${destinationObj.details}</p>
+      `
+
+    } else {
+      travelDetailElement.innerHTML = `
+          <p class='fs-5 text-center py-2'>Travel details not found.<p/>
+      `
+    }
+  </script>
+</body>
+
+</html>

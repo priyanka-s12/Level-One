@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Items</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      #successContainer {
+        display: none;
+      }
+
+      #errorMessage {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary py-3">
+        <div class="container-fluid mx-4">
+          <a class="navbar-brand fw-medium" href="index.html">
+            Inventory Management
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="items.html">Item List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addItems.html">Add Items</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container py-3">
+        <h2 class="mb-3">Add Items</h2>
+
+        <div
+          class="bg bg-success-subtle p-3 mb-3 rounded"
+          id="successContainer"
+        >
+          Item added successfully !
+        </div>
+        <div id="errorMessage" class="bg bg-danger-subtle p-3 mb-3 rounded">
+          An error occured while adding items.
+        </div>
+
+        <form id="addItemsForm">
+          <div class="mb-3">
+            <label for="itemName" class="form-label">Item Name:</label>
+            <input type="text" id="itemName" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity:</label>
+            <input type="number" id="quantity" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="categorySelect" class="form-label">Category:</label>
+            <select id="categorySelect" class="form-select">
+              <option value="All">All</option>
+              <option value="Perishable">Perishable</option>
+              <option value="Non-Perishable">Non-Perishable</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <input type="submit" value="Add Items" class="btn btn-primary" />
+          </div>
+        </form>
+      </section>
+    </main>
+    <script>
+      const addItemsForm = document.querySelector('#addItemsForm');
+      const successContainer = document.querySelector('#successContainer');
+      const errorMessage = document.querySelector('#errorMessage');
+
+      const itemName = document.querySelector('#itemName');
+      const quantity = document.querySelector('#quantity');
+      const categorySelect = document.querySelector('#categorySelect');
+      const apiUrl =
+        'https://inventory-management-student-neog-ca.replit.app/inventory';
+
+      addItemsForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const itemData = {
+          itemName: itemName.value,
+          quantity: quantity.value,
+          category: categorySelect.value,
+        };
+
+        fetch(apiUrl, {
+          method: 'POST',
+          body: JSON.stringify(itemData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            errorMessage.style.display = 'none';
+            console.log(data);
+
+            successContainer.style.display = 'block';
+          })
+          .catch(function (error) {
+            errorMessage.style.display = 'block';
+          });
+      });
+    </script>
+  </body>
+</html>

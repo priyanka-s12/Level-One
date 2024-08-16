@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Details</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container">
+          <a href="index.html" class="navbar-brand fw-medium">Movie Database</a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="movies.html" class="nav-link">Movies</a>
+              </li>
+              <li class="nav-item">
+                <a href="report.html" class="nav-link">Report</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container mt-3">
+        <h2>Movie Details</h2>
+      </div>
+
+      <section id="movieDetail" class="container py-3"></section>
+    </main>
+
+    <!-- <footer class="bg-dark text-light py-3">
+    <div class="container">
+      <div class="text-center">
+        <p>&copy; 2024 Company Name. All rights reserved.</p>
+      </div>
+    </div>
+  </footer> -->
+
+    <script>
+      const movies = [
+        {
+          id: 1,
+          title: 'Movie 1',
+          genre: 'Action',
+          releasedDate: '2023-01-15',
+          director: 'John Doe',
+        },
+        {
+          id: 2,
+          title: 'Movie 2',
+          genre: 'Drama',
+          releasedDate: '2023-02-20',
+          director: 'Jane Smith',
+        },
+      ];
+      let movieDetailElement = document.getElementById('movieDetail');
+      console.log(movieDetailElement);
+
+      //1st get the id from url
+      function getMovieId(id) {
+        let url = new URL(window.location.href);
+
+        return url.searchParams.get(id);
+      }
+
+      let movieId = parseInt(getMovieId('id'));
+      console.log(typeof movieId);
+
+      //2nd fetch that id's data from db
+      //here using strict euqality operator, so need to convert id into integer, if use loose equality operator == then no need to convert into int
+      let movieObj;
+      for (let i = 0; i < movies.length; i++) {
+        if (movies[i].id === movieId) {
+          movieObj = movies[i];
+        }
+      }
+      console.log(movieObj);
+
+      //3rd display that object data on the page
+      function generateCard() {
+        if (movieObj) {
+          const card = document.createElement('div');
+          card.className = 'card';
+
+          const cardHeader = document.createElement('div');
+          cardHeader.className = 'card-header';
+          const h3 = document.createElement('h3');
+          h3.innerHTML = `${movieObj.title}`;
+          cardHeader.appendChild(h3);
+
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body';
+
+          const genre = document.createElement('p');
+          genre.className = 'card-text';
+          genre.innerHTML = `<strong>Genre: </strong>${movieObj.genre}`;
+
+          const releasedDate = document.createElement('p');
+          releasedDate.className = 'card-text';
+          releasedDate.innerHTML = `<strong>Released Date: </strong>${movieObj.releasedDate}`;
+
+          const director = document.createElement('p');
+          director.className = 'card-text';
+          director.innerHTML = `<strong>Director: </strong>${movieObj.director}`;
+
+          cardBody.appendChild(genre);
+          cardBody.appendChild(releasedDate);
+          cardBody.appendChild(director);
+
+          card.appendChild(cardHeader);
+          card.appendChild(cardBody);
+
+          movieDetailElement.appendChild(card);
+        } else {
+          movieDetailElement.innerHTML = `<p>Movie not found.</p>`;
+        }
+      }
+      generateCard();
+    </script>
+  </body>
+</html>

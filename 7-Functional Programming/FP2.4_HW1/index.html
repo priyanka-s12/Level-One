@@ -1,0 +1,32 @@
+<!-- filter tasks on change of radio btns and show on DOM - filter, map, forEach -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>FP2.4_HW1</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <label for="all">
+      <input type="radio" id="all" value="all" name="status" checked />
+      all
+    </label>
+    <label for="todo">
+      <input type="radio" id="todo" value="todo" name="status" />
+      todo
+    </label>
+    <label for="completed">
+      <input type="radio" id="completed" value="completed" name="status" />
+      completed
+    </label>
+    <label for="inProgress">
+      <input type="radio" id="inProgress" value="inProgress" name="status" />
+      inProgress
+    </label>
+
+    <ul id="taskList"></ul>
+    <script src="script.js"></script>
+  </body>
+</html>

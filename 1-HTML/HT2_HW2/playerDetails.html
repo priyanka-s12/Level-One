@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Player Details</title>
+  </head>
+
+  <body>
+    <header>
+      <a href="index.html">Players Database</a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="players.html">Players</a></li>
+          <li><a href="report.html">Report</a></li>
+        </ul>
+      </nav>
+      <h1>Player Details</h1>
+    </header>
+
+    <main>
+      <section id="playerDetail"></section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Company Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+      let players = [
+        {
+          id: '1',
+          playerNumber: 'Player 1',
+          country: 'India',
+          role: 'Batsman',
+        },
+        {
+          id: '2',
+          playerNumber: 'Player 2',
+          country: 'Australia',
+          role: 'Bowler',
+        },
+      ];
+
+      //1st get the id from url
+      function getPlayerId(id) {
+        // console.log(window.location.href)
+        let url = new URL(window.location.href);
+        return url.searchParams.get(id);
+      }
+
+      let playerId = getPlayerId('id');
+
+      //2nd fetch that id data from db
+      let playerObj;
+      for (let i = 0; i < players.length; i++) {
+        if (players[i].id === playerId) {
+          playerObj = players[i];
+        }
+      }
+      // console.log(playerObj)
+
+      //3rd display that data in the view
+      let playerDetailElement = document.getElementById('playerDetail');
+      // console.log(playerDetailElement)
+      if (playerObj) {
+        playerDetailElement.innerHTML = `
+    <h2>${playerObj.playerNumber}</h2>
+    <p><strong>Country: </strong>${playerObj.country}</p>
+    <p><strong>Role: </strong>${playerObj.role}</p>`;
+      } else {
+        playerDetailElement.innerHTML = `Player not found.`;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA5.5_HW1</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <header class="container mt-3">
+      <h1>GET and POST</h1>
+    </header>
+
+    <section class="container mt-3">
+      <h2>GET Request</h2>
+      <button id="getDataBtn" class="btn btn-primary">Get Data</button>
+      <div id="getDataContainer" class="mt-3"></div>
+    </section>
+
+    <section class="container mt-3">
+      <h2>POST Request</h2>
+      <form id="postDataForm">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" class="form-control" />
+        <label for="message" class="form-label">Message:</label>
+        <textarea id="message" class="form-control"></textarea>
+        <button id="submitBtn" class="btn btn-success mt-3">Submit</button>
+      </form>
+      <div id="responseContainer" class="mt-3"></div>
+    </section>
+
+    <script>
+      const getDataBtn = document.querySelector('#getDataBtn');
+      const getDataContainer = document.querySelector('#getDataContainer');
+
+      const postDataForm = document.querySelector('#postDataForm');
+      const name = document.querySelector('#name');
+      const message = document.querySelector('#message');
+      const responseContainer = document.querySelector('#responseContainer');
+      const apiUrl = 'https://posts-student-neog.replit.app/posts';
+
+      getDataBtn.addEventListener('click', function () {
+        getDataContainer.innerHTML = '';
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // console.log(data)
+            if (data) {
+              for (let i = 0; i < data.length; i++) {
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body';
+
+                const h5 = document.createElement('h5');
+                h5.className = 'card-text';
+                h5.textContent = `POST ID: ${data[i]._id}`;
+
+                const post = document.createElement('p');
+                post.className = 'card-text';
+                post.textContent = JSON.stringify(data[i]);
+
+                cardBody.appendChild(h5);
+                cardBody.appendChild(post);
+                card.appendChild(cardBody);
+                getDataContainer.appendChild(card);
+              }
+            } else {
+              getDataContainer.textContent = 'Failed to fetch the data.';
+            }
+          })
+          .catch(function (error) {
+            getDataContainer.textContent =
+              'An error occured while fetching the data.';
+          });
+      });
+
+      postDataForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const requestData = {
+          name: name.value,
+          message: message.value,
+        };
+
+        fetch(apiUrl, {
+          method: 'POST',
+          body: JSON.stringify(requestData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              responseContainer.textContent = JSON.stringify(data);
+            } else {
+              responseContainer.textContent = 'Failed to submit the data';
+            }
+          })
+          .catch(function (error) {
+            responseContainer.textContent =
+              'An error occured while submitting the form.';
+          });
+      });
+    </script>
+  </body>
+</html>

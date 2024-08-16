@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA6.3_HW2</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <div class="container p-4">
+      <h1>Employee Management</h1>
+      <div id="successMessage"></div>
+      <ul id="employeeList" class="list-unstyled row mt-3"></ul>
+    </div>
+    <script>
+      const employeeList = document.querySelector('#employeeList');
+      const apiUrl =
+        'https://employee-management-backend-student-neog-ca.replit.app/employees';
+      const successMessage = document.querySelector('#successMessage');
+
+      function fetchData() {
+        employeeList.textContent = 'Employees Loading...';
+
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // console.log(data)
+            //populate data
+            if (data) {
+              employeeList.textContent = '';
+              successMessage.textContent = '';
+              for (let i = 0; i < data.length; i++) {
+                const listElements = document.createElement('li');
+                listElements.className = 'col-md-12 my-2';
+                listElements.innerHTML = `${data[i].name} - Deaprtment: ${data[i].department} - Gender: ${data[i].gender} <button class='btn btn-danger float-end' id='deleteBtn' data-id='${data[i]._id}'>Delete</button>`;
+                // console.log(listElements)
+                employeeList.appendChild(listElements);
+              }
+            } else {
+              employeeList.textContent = 'Failed to fetch the data.';
+            }
+
+            const deleteBtns = document.querySelectorAll('#deleteBtn');
+            for (let i = 0; i < deleteBtns.length; i++) {
+              //attach event listener to every btn
+              deleteBtns[i].addEventListener('click', function (event) {
+                const employeeId = event.target.getAttribute('data-id');
+                // console.log(employeeId)
+                const deleteApiUrl = `https://employee-management-backend-student-neog-ca.replit.app/employees/${employeeId}`;
+                // console.log(deleteApiUrl)
+
+                fetch(deleteApiUrl, {
+                  method: 'DELETE',
+                })
+                  .then(function (response) {
+                    return response.json();
+                  })
+                  .then(function (data) {
+                    if (data) {
+                      successMessage.textContent =
+                        'Employee detail deleted successfully!';
+                      fetchData();
+                    }
+                  });
+              });
+            }
+          })
+          .catch(function (error) {
+            employeeList.textContent =
+              'An error occured while fetching employees details.';
+          });
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

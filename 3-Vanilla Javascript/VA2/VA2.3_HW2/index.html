@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.3_HW2</title>
+  </head>
+
+  <body>
+    <!-- season -->
+    <label>Choose a season:</label>
+    <select id="seasonSelect">
+      <option value="spring">Spring</option>
+      <option value="summer">Summer</option>
+      <option value="fall">Fall</option>
+      <option value="winter">Winter</option>
+    </select>
+    <button id="displayTypicalWeatherBtn">Display Typical Weather</button>
+    <p id="weatherResult"></p>
+
+    <!-- movie genre  -->
+    <label>Choose a movie genre:</label>
+    <select id="movieGenreSelect">
+      <option value="scienceFiction">Science Fiction</option>
+      <option value="mystery">Mystery</option>
+      <option value="romance">Romance</option>
+    </select>
+    <button id="displayMovieRecommendationBtn">
+      Display Movie Recommendation
+    </button>
+    <p id="movieRecommendationResult"></p>
+
+    <!--pet  -->
+    <label>Choose a pet:</label>
+    <select id="petSelect">
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+      <option value="fish">Fish</option>
+    </select>
+    <button id="displayFunFactBtn">Display Fun Fact</button>
+    <p id="funFactResult"></p>
+
+    <!-- musical instrument -->
+    <label>Choose a musical instrument:</label>
+    <select id="instrumentSelect">
+      <option value="guitar">Guitar</option>
+      <option value="piano">Piano</option>
+      <option value="violin">Violin</option>
+    </select>
+    <p id="soundResult"></p>
+
+    <!--planet  -->
+    <label>Choose a planet:</label>
+    <select id="planetSelect">
+      <option value="earth">Earth</option>
+      <option value="mars">Mars</option>
+      <option value="jupiter">Jupiter</option>
+    </select>
+    <button id="displayPlanetFactBtn">Display Planet Fact</button>
+    <p id="planetFactResult"></p>
+
+    <script>
+      // weather
+      const seasonSelect = document.getElementById('seasonSelect');
+      const displayTypicalWeatherBtn = document.getElementById(
+        'displayTypicalWeatherBtn'
+      );
+      const weatherResult = document.getElementById('weatherResult');
+
+      displayTypicalWeatherBtn.addEventListener('click', function () {
+        const selectedSeason = seasonSelect.value;
+        // console.log(selectedSeason)
+
+        const typicalWeather = {
+          spring: 'Mild temperatures and blooming flowers.',
+          summer: 'Hot temperatures and sunny days.',
+          fall: 'Cooler temperatures and falling leaves.',
+          winter: 'Cold temperatures and snowfall',
+        };
+
+        weatherResult.textContent = `Typical Weather: ${typicalWeather[selectedSeason]}`;
+      });
+
+      // movie genre
+      const movieGenreSelect = document.getElementById('movieGenreSelect');
+      const displayMovieRecommendationBtn = document.getElementById(
+        'displayMovieRecommendationBtn'
+      );
+      const movieRecommendationResult = document.getElementById(
+        'movieRecommendationResult'
+      );
+
+      displayMovieRecommendationBtn.addEventListener('click', function () {
+        selectedMovieGenre = movieGenreSelect.value;
+        // console.log(selectedMovieGenre)
+
+        const movies = {
+          scienceFiction: 'Dune',
+          mystery: 'Gone Girl',
+          romance: 'Pride and Prejudice',
+        };
+
+        movieRecommendationResult.textContent = `Movie recommendation: ${movies[selectedMovieGenre]}`;
+      });
+
+      // pet
+
+      const petSelect = document.getElementById('petSelect');
+      const displayFunFactBtn = document.getElementById('displayFunFactBtn');
+      const funFactResult = document.getElementById('funFactResult');
+
+      displayFunFactBtn.addEventListener('click', function () {
+        const selectedPet = petSelect.value;
+        // console.log(selectedPet)
+
+        const funFacts = {
+          dog: 'Dogs are known for their loyalty and companionship.',
+          cat: 'Cats are independent and can be very playful.',
+          fish: 'Fish are the most diverse group of vertebrates.',
+        };
+
+        funFactResult.textContent = `Fun Fact: ${funFacts[selectedPet]}`;
+      });
+
+      // musical instrument
+      const instrumentSelect = document.getElementById('instrumentSelect');
+      const soundResult = document.getElementById('soundResult');
+
+      instrumentSelect.addEventListener('change', function () {
+        const selectedInstrument = instrumentSelect.value;
+
+        const sounds = {
+          guitar: 'The guitar produces melodic tones with its strings.',
+          piano: 'The piano creates hormonious music through its keys.',
+          violin: 'The violin produces sweet and expressive sounds.',
+        };
+
+        soundResult.textContent = `Sound: ${sounds[selectedInstrument]}`;
+      });
+
+      // planet
+      const planetSelect = document.getElementById('planetSelect');
+      const displayPlanetFactBtn = document.getElementById(
+        'displayPlanetFactBtn'
+      );
+      const planetFactResult = document.getElementById('planetFactResult');
+
+      displayPlanetFactBtn.addEventListener('click', function () {
+        const selectedPlanet = planetSelect.value;
+        // console.log(selectedPlanet)
+
+        const planetFacts = {
+          earth: 'Earth is the only known planet with life.',
+          mars: 'Mars is often called the "Red Planet" due to its color.',
+          jupiter: 'Jupiter is the largest palnet in our solar system.',
+        };
+        planetFactResult.textContent = `Planet Fact: ${planetFacts[selectedPlanet]} `;
+      });
+    </script>
+  </body>
+</html>

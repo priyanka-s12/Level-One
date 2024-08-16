@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Details</title>
+  </head>
+
+  <body>
+    <header>
+      <a href="index.html">Movie Database</a>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="movies.html">Movies</a></li>
+          <li><a href="report.html">Report</a></li>
+        </ul>
+      </nav>
+
+      <h1>Movie Details</h1>
+    </header>
+
+    <main>
+      <section id="movieDetail"></section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Company Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+      let movies = [
+        {
+          id: '1',
+          movieName: 'Movie 1',
+          genre: 'Action',
+          details: 'This is an action-packed movie.',
+          releaseDate: '2024-01-15',
+          director: 'John Doe',
+        },
+        {
+          id: '2',
+          movieName: 'Movie 2',
+          genre: 'Drama',
+          details: 'A dramatic story unfolds in this movie.',
+          releaseDate: '2025-02-20',
+          director: 'Jane Smith',
+        },
+        {
+          id: '3',
+          movieName: 'Movie 3',
+          genre: 'Comedy',
+          details: 'Get ready to laugh with this comedy.',
+          releaseDate: '2024-03-25',
+          director: 'Jane Walk',
+        },
+      ];
+
+      //1st get the id from url
+      function getMovieId(id) {
+        let url = new URL(window.location.href);
+
+        return url.searchParams.get(id);
+      }
+
+      let movieId = getMovieId('id');
+
+      //2nd fetch that id's data from db
+      let movieObj;
+      for (let i = 0; i < movies.length; i++) {
+        if (movies[i].id === movieId) {
+          movieObj = movies[i];
+        }
+      }
+      // console.log(movieObj)
+
+      //3rd display that object data on the page
+      let movieDetailElement = document.getElementById('movieDetail');
+      // console.log(movieDetailElement)
+      if (movieObj) {
+        movieDetailElement.innerHTML = `
+        <h2>${movieObj.movieName}</h2>
+        <p><strong>Genre: </strong>${movieObj.genre}</p>
+        <p><strong>Details: </strong>${movieObj.details}</p>
+        <p><strong>Release Date: </strong>${movieObj.releaseDate}</p>
+        <p><strong>Director: </strong>${movieObj.director}</p>`;
+      } else {
+        movieDetailElement.innerHTML = `Movie not found.`;
+      }
+    </script>
+  </body>
+</html>

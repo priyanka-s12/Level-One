@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.2_CW</title>
+  </head>
+
+  <body>
+    <!-- gender -->
+    <label>Choose your gender:</label>
+    <br />
+    <input type="radio" name="gender" value="Male" />
+    Male
+    <br />
+    <input type="radio" name="gender" value="Female" />
+    Female
+    <br />
+    <input type="radio" name="gender" value="Others" />
+    Others
+    <br />
+    <p id="genderResult"></p>
+
+    <!-- meal preference -->
+    <label>Choose your meal preference:</label>
+    <br />
+    <input type="radio" name="meal" value="Vegetarian" />
+    Vegetarian
+    <br />
+    <input type="radio" name="meal" value="Non-vegetarian" />
+    Non-vegetarian
+    <br />
+    <p id="mealPreferenceResult"></p>
+
+    <!-- size -->
+    <label>Choose a size:</label>
+    <br />
+    <input type="radio" name="size" value="Small" />
+    Small
+    <br />
+    <input type="radio" name="size" value="Medium" />
+    Medium
+    <br />
+    <input type="radio" name="size" value="Large" />
+    Large
+    <br />
+    <p id="sizeResult"></p>
+
+    <script>
+      // gender
+      const genderRadioButton = document.getElementsByName('gender');
+      const genderResult = document.getElementById('genderResult');
+
+      for (let i = 0; i < genderRadioButton.length; i++) {
+        genderRadioButton[i].addEventListener('change', function () {
+          // const selectedRadioButton = document.querySelector('input[name="gender"]:checked')
+          // console.log(selectedRadioButton)
+          //will give input element that selected, but we want value
+
+          const selectedRadioButton = document.querySelector(
+            'input[name="gender"]:checked'
+          ).value;
+          genderResult.textContent = `Selected Gender: ${selectedRadioButton}`;
+        });
+      }
+
+      // meal preference
+      const mealRadioButton = document.getElementsByName('meal');
+      const mealPreferenceResult = document.getElementById(
+        'mealPreferenceResult'
+      );
+
+      //get all radio buttons
+      for (let i = 0; i < mealRadioButton.length; i++) {
+        //attach change event listener to each of the radiobtn
+        mealRadioButton[i].addEventListener('change', function () {
+          //get selected radio btn
+          const selectedRadioButton = document.querySelector(
+            'input[name="meal"]:checked'
+          ).value;
+
+          mealPreferenceResult.textContent = `Selected Meal Preference: ${selectedRadioButton}`;
+        });
+      }
+
+      // size
+      const sizeRadioButtons = document.getElementsByName('size');
+      const sizeResult = document.getElementById('sizeResult');
+
+      for (let i = 0; i < sizeRadioButtons.length; i++) {
+        sizeRadioButtons[i].addEventListener('change', function () {
+          const selectedSize = document.querySelector(
+            'input[name="size"]:checked'
+          ).value;
+          // console.log(selectedSize)
+          sizeResult.textContent = `Selected Size: ${selectedSize}`;
+        });
+      }
+    </script>
+  </body>
+</html>

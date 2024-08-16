@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2_Assignment2</title>
+  </head>
+
+  <body>
+    <h1>User Waitlist Form</h1>
+
+    <form id="userWaitlistForm">
+      <label for="fullNameInput"><strong>Full Name:</strong></label>
+      <input type="text" id="fullNameInput" />
+      <br />
+      <br />
+
+      <label for="phoneNumberInput"><strong>Phone Number:</strong></label>
+      <input type="number" id="phoneNumberInput" />
+      <br />
+      <br />
+
+      <label for="emailInput"><strong>Email id:</strong></label>
+      <input type="text" id="emailInput" />
+      <br />
+      <br />
+
+      <label><strong>Gender:</strong></label>
+      <br />
+      <label for="male">
+        <input type="radio" id="male" value="Male" name="gender" />
+        Male
+      </label>
+      <br />
+      <label for="female">
+        <input type="radio" id="female" value="Female" name="gender" />
+        Female
+      </label>
+      <br />
+      <label for="others">
+        <input type="radio" id="others" value="Others" name="gender" />
+        Others
+      </label>
+      <br />
+      <br />
+
+      <label><strong>Are you a college graduate?</strong></label>
+      <br />
+      <label for="yes">
+        <input type="radio" id="yes" name="graduate" value="Yes" />
+        Yes
+      </label>
+      <br />
+      <label for="no">
+        <input type="radio" id="no" value="No" name="graduate" />
+        No
+      </label>
+      <br />
+      <label for="dropout">
+        <input type="radio" id="dropout" value="Dropout" name="graduate" />
+        Dropout
+      </label>
+      <br />
+      <br />
+
+      <label>
+        <strong>Are you working anywhere full-time or part-time?</strong>
+      </label>
+      <select id="workingTypeSelect">
+        <option value="Working Full Time">Working Full Time</option>
+        <option value="Working Part Time">Working Part Time</option>
+        <option value="Not Working Anywhere">Not Working Anywhere</option>
+      </select>
+      <br />
+      <br />
+
+      <label for="webDevTextarea">
+        <strong>Why do you want to learn web development?</strong>
+      </label>
+      <br />
+      <textarea id="webDevTextarea" rows="5" cols="40"></textarea>
+      <br />
+      <br />
+
+      <label><strong>How did you come to know about us?</strong></label>
+      <br />
+      <label for="youtube">
+        <input type="checkbox" id="youtube" name="sourceType" value="Youtube" />
+        Youtube
+      </label>
+      <br />
+      <label for="instagram">
+        <input
+          type="checkbox"
+          id="instagram"
+          value="Instagram"
+          name="sourceType"
+        />
+        Instagram
+      </label>
+      <br />
+      <label for="linkedin">
+        <input
+          type="checkbox"
+          id="linkedin"
+          value="Linkedin"
+          name="sourceType"
+        />
+        Linkedin
+      </label>
+      <br />
+      <label for="twitter">
+        <input type="checkbox" id="twitter" value="Twitter" name="sourceType" />
+        Twitter
+      </label>
+      <br />
+      <label for="friendAndFamily">
+        <input
+          type="checkbox"
+          id="friendAndFamily"
+          value="Friend and Family"
+          name="sourceType"
+        />
+        Friends and Family
+      </label>
+      <br />
+      <label for="others">
+        <input type="checkbox" id="others" value="Others" name="sourceType" />
+        Others
+      </label>
+      <br />
+      <br />
+
+      <input type="checkbox" id="confirmationCheckbox" />
+      <strong>
+        I confirm that all information in this form is factually true.
+      </strong>
+      <br />
+      <br />
+
+      <input type="submit" value="Submit Details" />
+    </form>
+
+    <p id="validateEmail"></p>
+
+    <div id="formResult"></div>
+
+    <script>
+      const userWaitlistForm = document.getElementById('userWaitlistForm');
+      //console.log(userWaitlistForm)
+
+      userWaitlistForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const fullNameInput = document.getElementById('fullNameInput').value;
+        //console.log(fullNameInput)
+
+        const phoneNumberInput =
+          document.getElementById('phoneNumberInput').value;
+        //console.log(phoneNumberInput)
+
+        const emailInput = document.getElementById('emailInput').value;
+        //console.log(emailInput)
+        const validateEmail = document.getElementById('validateEmail');
+        const atIndex = emailInput.indexOf('@');
+        const dotIndex = emailInput.indexOf('.');
+        if (atIndex > 0 && dotIndex > atIndex) {
+          validateEmail.textContent = `Entered email-id ${emailInput} is valid.`;
+        } else {
+          validateEmail.textContent = `Entered email-id ${emailInput} is invalid.`;
+        }
+
+        const selectedGender = document.querySelector(
+          'input[name="gender"]:checked'
+        ).value;
+        console.log(selectedGender);
+
+        const areYouGraduate = document.querySelector(
+          'input[name="graduate"]:checked'
+        ).value;
+
+        const selectedWorkingType =
+          document.getElementById('workingTypeSelect').value;
+
+        const whyLearnWebDev = document.getElementById('webDevTextarea').value;
+
+        const sourceType = document.querySelectorAll(
+          'input[name="sourceType"]:checked'
+        );
+        const selectedSources = [];
+        for (let i = 0; i < sourceType.length; i++) {
+          selectedSources.push(sourceType[i].value);
+        }
+        //console.log(selectedSources)
+
+        const divElement = document.getElementById('formResult');
+
+        const inputValues = `
+      <h2>Details Submitted</h2>
+      <p><strong>Name: </strong>${fullNameInput}</p>
+      <p><strong>Phone Number: </strong>${phoneNumberInput}</p>
+      <p><strong>Email Id: </strong>${emailInput}</p>
+      <p><strong>Gender: </strong>${selectedGender}</p>
+      <p><strong>Are you a college graduate? </strong>${areYouGraduate}</p>
+      <p><strong>Are you working anywhere full-time or part-time? </strong>${selectedWorkingType}</p>
+      <p><strong>Why do you want to learn web development? </strong>${whyLearnWebDev}</p>
+      <p><strong>How did you come to know about us? </strong>${selectedSources.join(
+        ', '
+      )}</p>
+      
+      `;
+
+        divElement.innerHTML = inputValues;
+      });
+    </script>
+  </body>
+</html>

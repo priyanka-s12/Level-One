@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.4_HW1</title>
+  </head>
+
+  <body>
+    <h1>Event Registration Form</h1>
+
+    <form id="eventRegistrationForm">
+      <label for="nameInput">Name:</label>
+      <input type="text" id="nameInput" />
+      <br />
+      <br />
+
+      <label for="emailInput">Email Address:</label>
+      <input type="email" id="emailInput" />
+      <br />
+      <br />
+
+      <label>Event type:</label>
+      <br />
+      <label for="conference">
+        <input
+          type="radio"
+          id="conference"
+          name="eventType"
+          value="Conference"
+        />
+        Conference
+      </label>
+      <br />
+      <label for="workshop">
+        <input type="radio" id="workshop" name="eventType" value="Workshop" />
+        Workshop
+      </label>
+      <br />
+      <label for="networking">
+        <input
+          type="radio"
+          id="networking"
+          value="Networking"
+          name="eventType"
+        />
+        Networking
+      </label>
+      <br />
+      <br />
+
+      <label>Dietary Restrictions:</label>
+      <br />
+      <label for="vegetarian">
+        <input type="checkbox" id="vegetarian" name="diet" value="Vegetarian" />
+        Vegetarian
+      </label>
+      <br />
+      <label for="vegan">
+        <input type="checkbox" id="vegan" name="diet" value="Vegan" />
+        Vegan
+      </label>
+      <br />
+      <label for="gluten-free">
+        <input
+          type="checkbox"
+          id="gluten-free"
+          value="Gluten-free"
+          name="diet"
+        />
+        Gluten-free
+      </label>
+      <br />
+      <br />
+
+      <label>T-shirt Size:</label>
+      <select id="tshirtSizeSelect">
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+      </select>
+      <br />
+      <br />
+
+      <input type="submit" value="Register" />
+    </form>
+
+    <div id="formResult"></div>
+
+    <script>
+      const eventRegistrationForm = document.getElementById(
+        'eventRegistrationForm'
+      );
+      // console.log(eventRegistrationForm)
+      eventRegistrationForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const enteredName = document.getElementById('nameInput').value;
+
+        const eneteredEmail = document.getElementById('emailInput').value;
+
+        const selectedEvent = document.querySelector(
+          'input[name="eventType"]:checked'
+        ).value;
+
+        const diet = document.querySelectorAll('input[name="diet"]:checked');
+        // console.log(diet)
+        const selectedRestrictions = [];
+        for (let i = 0; i < diet.length; i++) {
+          selectedRestrictions.push(diet[i].value);
+        }
+        // console.log(selectedRestrictions)
+
+        const selectedSize = document.getElementById('tshirtSizeSelect').value;
+        // console.log(selectedSize)
+
+        const divElement = document.getElementById('formResult');
+        const inputValues = `
+      <h2>Registration Details: </h2>
+      <p><strong>Name: </strong>${enteredName}</p>
+      <p><strong>Email: </strong>${eneteredEmail}</p>
+      <p><strong>Event Type: </strong>${selectedEvent}</p>
+      <p><strong>Dietary Restrictions: </strong>${selectedRestrictions.join(
+        ', '
+      )}</p>
+      <p><strong>T-shirt Size: </strong>${selectedSize}</p>
+      `;
+
+        divElement.innerHTML = inputValues;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP2.2</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <button type="button" id="countOneBtn">Increment Count 1</button>
+    <button type="button" id="countTwoBtn">Increment Count 2</button>
+    <p id="incrementCountOne"></p>
+    <p id="incrementCountTwo"></p>
+
+    <script>
+      const countOneBtn = document.getElementById('countOneBtn');
+      const countTwoBtn = document.getElementById('countTwoBtn');
+      const incrementCountOne = document.getElementById('incrementCountOne');
+      const incrementCountTwo = document.getElementById('incrementCountTwo');
+      let countOne = 0;
+      let countTwo = 0;
+
+      countOneBtn.addEventListener('click', () => {
+        countOne++;
+        incrementCountOne.textContent = `Count: ${countOne}`;
+      });
+
+      countTwoBtn.addEventListener('click', () => {
+        countTwo++;
+        incrementCountTwo.textContent = `Count: ${countTwo}`;
+      });
+    </script>
+  </body>
+</html>

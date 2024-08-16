@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.4_HW2</title>
+  </head>
+
+  <body>
+    <h1>Product Order Form</h1>
+    <form id="productOrderForm">
+      <label>Product Name:</label>
+      <select id="productNameSelect">
+        <option value="Product A">Product A</option>
+        <option value="Product B">Product B</option>
+        <option value="Product C">Product C</option>
+      </select>
+      <br />
+      <br />
+
+      <label for="quantityInput">Quantity:</label>
+      <input type="number" id="quantityInput" value="1" />
+      <br />
+      <br />
+
+      <label for="addressTextarea">Shipping Address:</label>
+      <br />
+      <textarea id="addressTextarea" rows="5" cols="40"></textarea>
+      <br />
+      <br />
+
+      <label>Payment Method:</label>
+      <br />
+      <label for="creditCard">
+        <input
+          type="radio"
+          name="paymentMethod"
+          id="creditCard"
+          value="Credit Card"
+        />
+        Credit Card
+      </label>
+      <br />
+      <label for="payPal">
+        <input type="radio" name="paymentMethod" id="payPal" value="PayPal" />
+        PayPal
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          id="bankTransfer"
+          name="paymentMethod"
+          value="Bank Transfer"
+        />
+        Bank Transfer
+      </label>
+      <br />
+      <br />
+
+      <label>Delivery Speed:</label>
+      <select id="deliverySpeedSelect">
+        <option>Standard</option>
+        <option>Express</option>
+        <option>Same Day</option>
+      </select>
+      <br />
+      <br />
+
+      <input type="submit" value="Place Order" />
+    </form>
+
+    <div id="formResult"></div>
+
+    <script>
+      const productOrderForm = document.getElementById('productOrderForm');
+
+      productOrderForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const selectedProductName =
+          document.getElementById('productNameSelect').value;
+
+        const enteredQuantity = document.getElementById('quantityInput').value;
+
+        const enteredAddress = document.getElementById('addressTextarea').value;
+
+        const selectedPaymentMethod = document.querySelector(
+          'input[name="paymentMethod"]:checked'
+        ).value;
+        //
+
+        const selectedDeliverySpeed = document.getElementById(
+          'deliverySpeedSelect'
+        ).value;
+        // console.log(selectedProductName, enteredQuantity, selectedPaymentMethod, selectedDeliverySpeed)
+
+        const divElement = document.getElementById('formResult');
+
+        const inputValues = `
+      <h2>Order Details:</h2>
+      <p><strong>Product Name: </strong>${selectedProductName}</p>
+      <p><strong>Quantity: </strong>${enteredQuantity}</p>
+      <p><strong>Shipping Address: </strong>${enteredAddress}</p>
+      <p><strong>Payment Method: </strong>${selectedPaymentMethod}</p>
+      <p><strong>Delivery Speed: </strong>${selectedDeliverySpeed}</p>
+      `;
+
+        divElement.innerHTML = inputValues;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee Details</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="bg-dark text-light text-center py-3">
+      <h1>Employee Details</h1>
+    </header>
+    <main class="container mt-4">
+      <section id="employeeDetail"></section>
+    </main>
+
+    <script>
+      const employees = [
+        {
+          id: 1,
+          name: 'John Doe',
+          title: 'Software Developer',
+          department: 'IT',
+        },
+        {
+          id: 2,
+          name: 'Jane Smith',
+          title: 'Designer',
+          department: 'Design',
+        },
+        {
+          id: 3,
+          name: 'Bob Johnson',
+          title: 'Product Manager',
+          department: 'Management',
+        },
+      ];
+
+      const employeeDetailDiv = document.querySelector('#employeeDetail');
+
+      //1. get the id from url
+      function getEmployeeById(id) {
+        console.log(window.location.href);
+        let url = new URL(window.location.href);
+        // console.log(typeof url)
+        // console.log(url.searchParams.get(id))
+        return url.searchParams.get(id);
+      }
+
+      let employeeId = parseInt(getEmployeeById('id'));
+      // console.log(typeof employeeId)
+
+      //2. find that id in the database
+      let employee;
+      for (let i = 0; i < employees.length; i++) {
+        if (employees[i].id === employeeId) {
+          employee = employees[i]; // get emp obj
+        }
+      }
+      // console.log(employee)
+
+      //3. display the details in the view -> how to access DOM elements
+      function generateCard() {
+        if (employee) {
+          const card = document.createElement('div');
+          card.className = 'card';
+
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body';
+
+          const h2 = document.createElement('h2');
+          h2.className = 'card-title';
+          h2.innerHTML = `${employee.name}`;
+          cardBody.appendChild(h2);
+
+          const unorderedList = document.createElement('ul');
+          unorderedList.classList.add('list-group', 'list-group-flush');
+
+          const name = document.createElement('li');
+          name.className = 'list-group-item';
+          name.innerHTML = `<strong>Name: </strong>${employee.name}`;
+
+          const designation = document.createElement('li');
+          designation.className = 'list-group-item';
+          designation.innerHTML = `<strong>Designation: </strong>${employee.title}`;
+
+          const department = document.createElement('li');
+          department.className = 'list-group-item';
+          department.innerHTML = `<strong>Department: </strong>${employee.department}`;
+
+          unorderedList.appendChild(name);
+          unorderedList.appendChild(designation);
+          unorderedList.appendChild(department);
+
+          cardBody.appendChild(unorderedList);
+
+          card.appendChild(cardBody);
+
+          employeeDetailDiv.appendChild(card);
+        } else {
+          employeeDetailDiv.innerHTML = `<p>Employee not found.</p>`;
+        }
+      }
+      generateCard();
+    </script>
+  </body>
+</html>

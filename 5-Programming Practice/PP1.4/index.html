@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP1.4</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Multiplication Table Generator</h1>
+    <label for="numberInput">Enter a Number:</label>
+    <input type="number" id="numberInput" />
+    <button id="generateTableBtn" type="button">Generate Table</button>
+    <ul id="unorderedList"></ul>
+
+    <script>
+      const unorderedList = document.getElementById('unorderedList');
+      const numberInput = document.getElementById('numberInput');
+      const generateTableBtn = document.getElementById('generateTableBtn');
+
+      // generateTableBtn.addEventListener('click', function(){
+      //   unorderedList.innerHTML = ''
+      //   numberValue = numberInput.value;
+      //   console.log(numberValue)
+      //   for(let i = 1; i <= 12; i++){
+      //     const listElement = document.createElement('li')
+      //     listElement.textContent = `${numberValue} * ${i} = ${numberValue*i}`
+      //     unorderedList.appendChild(listElement)
+      //   }
+      // })
+
+      generateTableBtn.addEventListener('click', () => {
+        const numberValue = numberInput.value;
+        printTable(numberValue);
+      });
+
+      const printTable = (enteredNumber) => {
+        unorderedList.innerHTML = '';
+        for (let i = 1; i <= 12; i++) {
+          const listElement = document.createElement('li');
+          listElement.textContent = `${enteredNumber} * ${i} = ${
+            enteredNumber * i
+          }`;
+          unorderedList.appendChild(listElement);
+        }
+      };
+    </script>
+  </body>
+</html>

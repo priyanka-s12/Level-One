@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA5.4_CW</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>API Post Call</h1>
+    <form id="postForm">
+      <label for="name">Name:</label>
+      <br />
+      <input type="text" id="name" />
+      <br />
+      <label for="message">Message:</label>
+      <br />
+      <input type="text" id="message" />
+      <br />
+      <button type="submit">Submit</button>
+      <div id="responseContainer"></div>
+
+      <script>
+        const postForm = document.querySelector('#postForm');
+        const name = document.querySelector('#name');
+        const message = document.querySelector('#message');
+        const responseContainer = document.querySelector('#responseContainer');
+
+        postForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+          //request value object
+          const requestData = {
+            name: name.value,
+            message: message.value,
+          };
+          //2nd argument is our postdata we are sending
+          //these functions are not using anywhere so it's ok to not give name to function
+          fetch(apiUrl, {
+            method: 'POST',
+            body: JSON.stringify(requestData),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (data) {
+              // console.log(data)
+              if (data) {
+                responseContainer.textContent = JSON.stringify(data);
+              } else {
+                responseContainer.textContent = 'Failed to make the POST call.';
+              }
+            })
+            .catch(function (error) {
+              responseContainer.textContent =
+                'An error occured while making the POST call.';
+            });
+        });
+      </script>
+    </form>
+  </body>
+</html>

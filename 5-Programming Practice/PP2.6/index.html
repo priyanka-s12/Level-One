@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP2.6</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <button id="decrementCount1Btn" type="button">Decrement Count 1</button>
+    <button id="decrementCount2Btn" type="button">Decrement Count 2</button>
+    <p>
+      Count 1:
+      <span id="decrementCountOne">20</span>
+    </p>
+    <p>
+      Count 2:
+      <span id="decrementCountTwo">20</span>
+    </p>
+    <p>
+      Total Count:
+      <span id="totalCount">40</span>
+    </p>
+
+    <script>
+      const decrementCount1Btn = document.getElementById('decrementCount1Btn');
+      const decrementCount2Btn = document.getElementById('decrementCount2Btn');
+      const decrementCountOne = document.getElementById('decrementCountOne');
+      const decrementCountTwo = document.getElementById('decrementCountTwo');
+      const totalCount = document.getElementById('totalCount');
+
+      let countOne = 20;
+      let countTwo = 20;
+      let total = 40;
+
+      decrementCount1Btn.addEventListener('click', () => {
+        countOne--;
+        total--;
+        displayResult(countOne, decrementCountOne);
+      });
+
+      decrementCount2Btn.addEventListener('click', () => {
+        countTwo--;
+        total--;
+        displayResult(countTwo, decrementCountTwo);
+      });
+
+      const displayResult = (count, paraElement) => {
+        paraElement.textContent = `${count}`;
+        totalCount.textContent = `${total}`;
+      };
+    </script>
+  </body>
+</html>

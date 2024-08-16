@@ -1,0 +1,44 @@
+<!--The <span> tag is an inline container used to mark up a part of a text, or a part of a document. The <span> tag is easily styled by CSS or manipulated with JavaScript using the class or id attribute. The <span> tag is much like the <div> element, but <div> is a block-level element and <span> is an inline element.  -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP2.3</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <button id="countOneBtn" type="button">Increment Count 1</button>
+    <button id="countTwoBtn" type="button">Increment Count 2</button>
+    <p>
+      Count 1:
+      <span id="incrementCountOne"></span>
+    </p>
+    <p>
+      Count 2:
+      <span id="incrementCountTwo"></span>
+    </p>
+
+    <script>
+      const countOneBtn = document.getElementById('countOneBtn');
+      const countTwoBtn = document.getElementById('countTwoBtn');
+      const incrementCountOne = document.getElementById('incrementCountOne');
+      const incrementcountTwo = document.getElementById('incrementCountTwo');
+
+      let countOne = 0;
+      let countTwo = 0;
+
+      countOneBtn.addEventListener('click', () => {
+        countOne++;
+        incrementCountOne.textContent = `${countOne}`;
+      });
+
+      countTwoBtn.addEventListener('click', () => {
+        countTwo++;
+        incrementcountTwo.textContent = `${countTwo}`;
+      });
+    </script>
+  </body>
+</html>

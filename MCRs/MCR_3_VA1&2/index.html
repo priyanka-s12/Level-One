@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>MCR_3_VA1 & VA2</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Library User Form</h1>
+
+    <form id="libraryUserForm">
+      <label for="cardNumber"><strong>Library Card Number:</strong></label>
+      <br />
+      <input type="text" id="cardNumber" />
+      <br />
+      <br />
+
+      <label for="fullName"><strong>Full Name:</strong></label>
+      <br />
+      <input type="text" id="fullName" />
+      <br />
+      <br />
+
+      <label for="phoneNumber"><strong>Phone Number:</strong></label>
+      <br />
+      <input type="number" id="phoneNumber" />
+      <br />
+      <br />
+
+      <label for="emailInput"><strong>Email:</strong></label>
+      <br />
+      <input type="email" id="emailInput" />
+      <br />
+      <br />
+
+      <label><strong>Gender:</strong></label>
+      <br />
+      <label for="male">
+        <input type="radio" id="male" value="Male" name="gender" />
+        Male
+      </label>
+      <br />
+      <label for="female">
+        <input type="radio" id="female" value="Female" name="gender" />
+        Female
+      </label>
+      <br />
+      <label for="other">
+        <input type="radio" id="other" value="Other" name="gender" />
+        Other
+      </label>
+      <br />
+      <br />
+
+      <label for="addressTextarea"><strong>Address:</strong></label>
+      <br />
+      <textarea id="addressTextarea" rows="5" cols="40"></textarea>
+      <br />
+      <br />
+
+      <label for="membershipType"><strong>Membership Type:</strong></label>
+      <br />
+      <select id="membershipType">
+        <option value="Student">Student</option>
+        <option value="Faculty">Faculty</option>
+        <option value="General Public">General Public</option>
+      </select>
+      <br />
+      <br />
+
+      <label for="genre"><strong>Genre Interests:</strong></label>
+      <br />
+      <label for="fiction">
+        <input type="checkbox" id="fiction" value="Fiction" name="genre" />
+        Fiction
+      </label>
+      <br />
+      <label for="nonFiction">
+        <input
+          id="nonFiction"
+          type="checkbox"
+          value="Non-Fiction"
+          name="genre"
+        />
+        Non-Fiction
+      </label>
+      <br />
+      <label for="selfHelp">
+        <input type="checkbox" id="selfHelp" name="genre" value="Self-Help" />
+        Self-Help
+      </label>
+      <br />
+      <label for="biography">
+        <input type="checkbox" id="biography" name="genre" value="Biography" />
+        Biography
+      </label>
+      <br />
+      <label for="mystery">
+        <input
+          type="checkbox"
+          id="mystery"
+          name="genre"
+          value="Mystery/Thriller"
+        />
+        Mystery/Thriller
+      </label>
+      <br />
+      <label for="poetry">
+        <input type="checkbox" id="poetry" name="genre" value="Poetry" />
+        Poetry
+      </label>
+      <br />
+      <label for="others">
+        <input type="checkbox" id="others" name="genre" value="Others" />
+        Others
+      </label>
+      <br />
+      <br />
+
+      <input type="submit" value="Submit Details" />
+      <br />
+      <br />
+    </form>
+
+    <div id="formResult"></div>
+    <br />
+    <br />
+
+    <script>
+      const libraryUserForm = document.getElementById('libraryUserForm');
+      const formResult = document.querySelector('#formResult');
+
+      libraryUserForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const cardNumber = document.getElementById('cardNumber').value;
+        const fullName = document.getElementById('fullName').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        const emailInput = document.getElementById('emailInput').value;
+        const selectedGender = document.querySelector(
+          'input[name="gender"]:checked'
+        ).value;
+        const addressTextarea =
+          document.getElementById('addressTextarea').value;
+        const membershipType = document.getElementById('membershipType').value;
+        const selectedGenre = document.querySelectorAll(
+          'input[name="genre"]:checked'
+        );
+
+        const genres = [];
+        for (let i = 0; i < selectedGenre.length; i++) {
+          genres.push(selectedGenre[i].value);
+        }
+        // console.log(genres)
+
+        const inputValues = `
+      <h2>User Details</h2>
+      <p><strong>Library Card Number: </strong>${cardNumber}</p>
+      <p><strong>Full Name: </strong>${fullName}</p>
+      <p><strong>Phone Number: </strong>${phoneNumber}</p>
+      <p><strong>Email ID: </strong>${emailInput}</p>
+      <p><strong>Gender: </strong>${selectedGender}</p>
+      <p><strong>Address: </strong>${addressTextarea}</p>
+      <p><strong>Membership Type: </strong>${membershipType}</p>
+      <p><strong>Genre Interests: </strong>${genres.join(', ')}</p>
+      `;
+        formResult.innerHTML = inputValues;
+      });
+    </script>
+  </body>
+</html>

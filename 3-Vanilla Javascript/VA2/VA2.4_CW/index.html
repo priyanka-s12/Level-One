@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.4_CW</title>
+  </head>
+
+  <body>
+    <h1>User Profile Form</h1>
+
+    <!-- wrap all elements in the form -->
+    <form id="userProfileForm">
+      <!-- labels should be descriptive -->
+      <label for="userNameInput">Enter Your Name:</label>
+      <br />
+      <input type="text" id="userNameInput" />
+      <br />
+      <br />
+
+      <label for="addressTextarea">Full Enter Your Full Address:</label>
+      <br />
+      <textarea id="addressTextarea" rows="5" cols="40"></textarea>
+      <br />
+      <br />
+
+      <label>Select Your Gender:</label>
+      <br />
+      <label for="male">
+        <input type="radio" id="male" name="gender" value="Male" />
+        Male
+      </label>
+      <br />
+      <label for="female">
+        <input type="radio" id="female" value="Female" name="gender" />
+        Female
+      </label>
+      <br />
+      <label for="others">
+        <input type="radio" id="others" name="gender" value="Others" />
+        Others
+      </label>
+      <br />
+      <br />
+
+      <label>Select Multiple Interests:</label>
+      <br />
+      <label for="reading">
+        <input type="checkbox" name="interests" id="reading" value="Reading" />
+        Reading
+      </label>
+      <br />
+      <label for="gardening">
+        <input
+          type="checkbox"
+          id="gardening"
+          value="gardening"
+          name="interests"
+        />
+        Gardening
+      </label>
+      <br />
+      <label for="painting">
+        <input
+          type="checkbox"
+          id="painting"
+          name="interests"
+          value="Painting"
+        />
+        Painting
+      </label>
+      <br />
+      <br />
+
+      <label>Select Favourite Color:</label>
+      <br />
+      <select id="colorSelect">
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+      </select>
+      <br />
+      <br />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <div id="formResult"></div>
+
+    <script>
+      const userProfileForm = document.getElementById('userProfileForm');
+      // console.log(userProfileForm)
+
+      userProfileForm.addEventListener('submit', function (event) {
+        //after submitting form, page gets refreshed and route changed (another page) and value displayed on url, preventdefault doesn't change route, not refreshed page
+        event.preventDefault();
+        const userNameInput = document.getElementById('userNameInput').value;
+        const addressTextarea =
+          document.getElementById('addressTextarea').value;
+        const gender = document.querySelector(
+          'input[name="gender"]:checked'
+        ).value;
+        // console.log(userNameInput, addressTextarea, gender)
+        const interests = document.querySelectorAll(
+          'input[name="interests"]:checked'
+        );
+        // new web api - querySelectorAll(). getElementsByName() both works
+        const selectedInterests = [];
+        for (let i = 0; i < interests.length; i++) {
+          selectedInterests.push(interests[i].value);
+        }
+
+        const favColor = document.getElementById('colorSelect').value;
+        // console.log(selectedInterests, favColor)
+
+        const userInputValues = `
+      <h2>Submitted Information</h2>
+      <p>Name: ${userNameInput}</p>
+      <p>Full Address: ${addressTextarea}</p>
+      <p>Gender: ${gender}</p>
+      <p>Interests: ${selectedInterests.join(', ')}</p>
+      <p>Favourite Color: ${favColor}</p>
+      `;
+
+        const divElement = document.getElementById('formResult');
+
+        divElement.innerHTML = userInputValues;
+      });
+    </script>
+  </body>
+</html>

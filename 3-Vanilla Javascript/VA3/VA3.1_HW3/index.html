@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA3.1_HW3</title>
+    <link
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="container py-2">
+      <h1>Poll Voting</h1>
+    </header>
+
+    <section class="container py-2">
+      <label for="johnDoe" class="py-2">
+        Jone Doe
+        <input type="radio" id="johnDoe" name="member" value="John Doe" />
+      </label>
+      <br />
+      <label for="alexWilliam" class="py-2">
+        Alex William
+        <input
+          type="radio"
+          id="alexWilliam"
+          name="member"
+          value="Alex William"
+        />
+      </label>
+      <br />
+      <label for="preranaNawar" class="py-2">
+        Prerana Nawar
+        <input
+          type="radio"
+          id="preranaNawar"
+          name="member"
+          value="Prerana Nawar"
+        />
+      </label>
+      <br />
+      <button id="voteBtn" class="btn btn-primary my-2">Vote</button>
+      <p id="validateMember"></p>
+    </section>
+
+    <section class="container py-2">
+      <h2>Results:</h2>
+      <ul id="resultList" class="list-group"></ul>
+    </section>
+
+    <section class="container py-2">
+      <h2>Winner:</h2>
+      <p id="winner"></p>
+    </section>
+
+    <script>
+      const voteBtn = document.getElementById('voteBtn');
+      const resultList = document.getElementById('resultList');
+      const winner = document.getElementById('winner');
+      const validateMember = document.getElementById('validateMember');
+      const members = document.getElementsByName('member');
+
+      let johnVote = 0;
+      let alexVote = 0;
+      let preranaVote = 0;
+
+      const johnListElement = document.createElement('li');
+      const alexListElement = document.createElement('li');
+      const preranaListElement = document.createElement('li');
+
+      voteBtn.addEventListener('click', function () {
+        const selectedMember = document.querySelector(
+          'input[name="member"]:checked'
+        );
+
+        if (selectedMember == null) {
+          validateMember.textContent = 'Please select a member.';
+        } else {
+          countVotes(selectedMember.value);
+          updateResult();
+        }
+      });
+
+      function countVotes(val) {
+        if (val === 'John Doe') {
+          johnVote++;
+          // console.log("john", johnVote)
+          johnListElement.className = 'list-group-item';
+          johnListElement.innerHTML = `<div class="mt-2"><p>${val}: ${johnVote}</p></div>`;
+          resultList.appendChild(johnListElement);
+          validateMember.textContent = '';
+          return johnVote;
+        } else if (val === 'Alex William') {
+          alexVote++;
+          // console.log("allex", alexVote)
+          alexListElement.className = 'list-group-item';
+          alexListElement.innerHTML = `<div class="mt-2"><p>${val}: ${alexVote}</p></div>`;
+          resultList.appendChild(alexListElement);
+          validateMember.textContent = '';
+          return alexVote;
+        } else if (val === 'Prerana Nawar') {
+          preranaVote++;
+          // console.log("pre", preranaVote)
+          preranaListElement.className = 'list-group-item';
+          preranaListElement.innerHTML = `<div class="mt-2"><p>${val}: ${preranaVote}</p></div>`;
+          resultList.appendChild(preranaListElement);
+          validateMember.textContent = '';
+          return preranaVote;
+        }
+      }
+
+      function updateResult() {
+        // console.log(johnVote, alexVote, preranaVote)
+        if (johnVote > alexVote && johnVote > preranaVote) {
+          winner.textContent = `John Doe is winning with ${johnVote} votes!`;
+        } else if (alexVote > johnVote && alexVote > preranaVote) {
+          winner.textContent = `Alex William is winning with ${alexVote} votes!`;
+        } else if (preranaVote > johnVote && preranaVote > alexVote) {
+          winner.textContent = `Prerana Nawar is winning with ${preranaVote} votes!`;
+        } else if (johnVote == alexVote) {
+          winner.textContent = `It's a tie between John Doe and Alex William with ${johnVote} votes! `;
+        } else if (johnVote == preranaVote) {
+          winner.textContent = `It's a tie between John Doe and Prerana Nawar with ${johnVote} votes!`;
+        } else if (alexVote == preranaVote) {
+          winner.textContent = `It's a tie between Allex William and Prerana Nawar with ${alexVote} votes!`;
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

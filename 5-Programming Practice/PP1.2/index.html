@@ -1,0 +1,65 @@
+<!--Write a program that generates an array of numbers from 1 to 30. For each number, if it is a prime number, replace it with "Prime". If it is a multiple of 3, replace it with "Fizz". If it is a multiple of 5, replace it with "Buzz". If it is both a prime number and a multiple of 3, replace it with "FizzPrime". If it is both a prime number and a multiple of 5, replace it with "BuzzPrime". Display the resulting array on the DOM as an ordered list.  -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP1.2</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <!-- greater than 1, which is only divisible by 1 and itself. -->
+    <h1>Prime Fizz Buzz Program Output</h1>
+    <ol id="orderedList"></ol>
+
+    <script>
+      const orderedList = document.getElementById('orderedList');
+
+      const isPrime = (number) => {
+        if (number <= 1) {
+          return false;
+        }
+        //check from 2 to number-1
+        for (let i = 2; i < number; i++) {
+          if (number % i === 0) {
+            return false;
+          }
+        }
+        return true;
+      };
+
+      const primeFizzBuzz = (number) => {
+        const arr = [];
+        for (let i = 1; i <= number; i++) {
+          if (isPrime(i) && i % 3 === 0) {
+            arr.push('FizzPrime');
+          } else if (isPrime(i) && i % 5 === 0) {
+            arr.push('BuzzPrime');
+          } else if (i % 3 === 0) {
+            arr.push('Fizz');
+          } else if (i % 5 === 0) {
+            arr.push('Buzz');
+          } else if (isPrime(i)) {
+            arr.push('Prime');
+          } else {
+            arr.push(i);
+          }
+        }
+        // console.log(arr)
+        displayArray(arr);
+      };
+
+      const displayArray = (array) => {
+        for (let i = 0; i < array.length; i++) {
+          const listElement = document.createElement('li');
+          listElement.textContent = `${array[i]}`;
+          orderedList.appendChild(listElement);
+        }
+      };
+
+      primeFizzBuzz(30);
+    </script>
+  </body>
+</html>

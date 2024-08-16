@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Students</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      #successContainer {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid mx-3">
+          <a class="navbar-brand fw-medium" href="index.html">
+            Student Management
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="students.html">Student List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addStudent.html">Add Student</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container py-3">
+        <h2>Add Student</h2>
+
+        <div id="successContainer" class="bg-success-subtle mb-3 p-3 rounded">
+          Student data added successfully !
+        </div>
+
+        <form id="addStudentForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="age" class="form-label">Age:</label>
+            <input type="number" id="age" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="genderSelect" class="form-label">Gender</label>
+            <select id="genderSelect" class="form-select">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="grade" class="form-label">Grade:</label>
+            <input type="text" id="grade" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="marks" class="form-label">Marks:</label>
+            <input type="number" id="marks" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="attendance" class="form-label">Attendance:</label>
+            <input type="number" id="attendance" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <input type="submit" value="Add Student" class="btn btn-primary" />
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const addStudentForm = document.querySelector('#addStudentForm');
+      const name = document.querySelector('#name');
+      const age = document.querySelector('#age');
+      const selectedGender = document.querySelector('#genderSelect');
+      const grade = document.querySelector('#grade');
+      const marks = document.querySelector('#marks');
+      const attendance = document.querySelector('#attendance');
+      const apiUrl =
+        'https://student-management-Student-neog.replit.app/students';
+      const successContainer = document.querySelector('#successContainer');
+
+      addStudentForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const studentData = {
+          name: name.value,
+          age: age.value,
+          gender: selectedGender.value,
+          grade: grade.value,
+          marks: marks.value,
+          attendance: attendance.value,
+        };
+
+        fetch(apiUrl, {
+          method: 'POST',
+          body: JSON.stringify(studentData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // console.log(data)
+            successContainer.style.display = 'block';
+          });
+      });
+    </script>
+  </body>
+</html>

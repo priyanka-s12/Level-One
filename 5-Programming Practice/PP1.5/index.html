@@ -1,0 +1,54 @@
+<!--Write a program that takes a sentence as user input and capitalizes the text in a specific way based on the number of words. The conditions are as follows:
+If the number of words in the sentence is less than 4, capitalize the first letter of each word.
+If the number of words is 4 or more, only capitalize the first letter of the first word.
+The program should display the modified sentence on the DOM as an output.  -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP1.5</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Capitalize Words Program</h1>
+    <label for="sentenceInput">Enter a Sentence:</label>
+    <input type="text" id="sentenceInput" />
+    <button id="capitalizedWordBtn" type="button">Capitalize Words</button>
+    <p id="result"></p>
+
+    <script>
+      const capitalizedWordBtn = document.getElementById('capitalizedWordBtn');
+      const sentenceInput = document.getElementById('sentenceInput');
+      const result = document.getElementById('result');
+
+      capitalizedWordBtn.addEventListener('click', () => {
+        const sentence = sentenceInput.value;
+        // console.log(sentence)
+        displayResult(sentence);
+      });
+
+      //split(), join(), slice() methods of array, And
+      //charAt(), toUpperCase(), trim() methods of string
+      displayResult = (sentence) => {
+        const words = sentence.trim().split(' ');
+        // console.log(words)
+
+        for (let i = 0; i < words.length; i++) {
+          if (words.length < 4) {
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+            // console.log(words[i])
+          } else {
+            if (i === 0) {
+              words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+              // console.log(words[i])
+            }
+          }
+        }
+        // console.log(words.join(' '))
+        result.textContent = `${words.join(' ')}`;
+      };
+    </script>
+  </body>
+</html>

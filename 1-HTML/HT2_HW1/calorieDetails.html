@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calorie Details</title>
+  </head>
+
+  <body>
+    <header>
+      <a href="index.html">MyHealth</a>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="calorie.html">Calories</a></li>
+        </ul>
+      </nav>
+
+      <h1>Calorie Details</h1>
+    </header>
+    <main>
+      <section id="calorieDetail"></section>
+    </main>
+    <footer>
+      <p>&copy; 2024 MyHealth App. All rights reserved.</p>
+    </footer>
+    <script>
+      let meals = [
+        {
+          id: '1',
+          mealName: 'Breakfast',
+          item: 'Dosa',
+          calories: '200 Cal',
+        },
+        {
+          id: '2',
+          mealName: 'Lunch',
+          item: 'Roti, sabji, salad, curd',
+          calories: '700 Cal',
+        },
+        {
+          id: '3',
+          mealName: 'Dinner',
+          item: 'Rice, dal, salad, sabji',
+          calories: '500 Cal',
+        },
+      ];
+
+      //1st - get id from url
+      function getMealById(id) {
+        console.log(window.location.href);
+        let url = new URL(window.location.href);
+        console.log(url.searchParams.get('id'));
+        return url.searchParams.get('id');
+      }
+
+      let mealId = getMealById('id');
+      // console.log(mealId)
+
+      //2nd - find that id in the db
+      let meal;
+      for (let i = 0; i < meals.length; i++) {
+        if (meals[i].id === mealId) {
+          meal = meals[i];
+        }
+      }
+      // console.log(meal)
+
+      // 3rd - display details in the view
+      let calorieDetailElement = document.getElementById('calorieDetail');
+
+      if (meal) {
+        // console.log(calorieDetailElement)
+        calorieDetailElement.innerHTML = `
+        <h2>${meal.mealName}</h2>
+        <ul>
+          <li>Meal: ${meal.mealName}</li>
+          <li>Item: ${meal.item}</li>
+          <li>Calories: ${meal.calories}</li>
+        </ul>`;
+      } else {
+        calorieDetailElement.innerHTML = `Meal not found.`;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookish - Library Management Application</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand fw-medium" href="index.html">Bookish</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="books.html">Books</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="facts.html">Facts</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="py-5">
+      <section class="container">
+        <h2>Add a Book</h2>
+        <form id="addBookForm">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="author" class="form-label">Author:</label>
+            <input type="text" id="author" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="genreSelect" class="form-label">Genre:</label>
+            <select id="genreSelect" class="form-select">
+              <option value="Classic">Classic</option>
+              <option value="Science Fiction">Science Fiction</option>
+              <option value="Music">Music</option>
+              <option value="Magazine">Magazine</option>
+              <option value="technology">Technology</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="mediaTypeSelect" class="form-label">Media Type:</label>
+            <select id="mediaTypeSelect" class="form-select">
+              <option value="Book">Book</option>
+              <option value="DVD">DVD</option>
+              <option value="Magazine">Magazine</option>
+              <option value="Digital Book">Digital Book</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary" id="addBookBtn">
+              Add Book
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="py-3">
+        <div class="container">
+          <h3 class="mb-3">Book List</h3>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="genreFilter" class="form-label">
+                Filter By Genre:
+              </label>
+              <select id="genreFilter" class="form-select">
+                <option value="All">All Books</option>
+                <option value="Classic">Classic</option>
+                <option value="Science Fiction">Science Fiction</option>
+                <option value="Music">Music</option>
+                <option value="Magazine">Magazine</option>
+                <option value="Technology">Technology</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="mediaTypeFilter" class="form-label">
+                Filter By Media Type:
+              </label>
+              <select id="mediaTypeFilter" class="form-select">
+                <option value="All">All</option>
+                <option value="Book">Book</option>
+                <option value="DVD">DVD</option>
+                <option value="Magazine">Magazine</option>
+                <option value="Digital Book">Digital Book</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-3">
+        <div class="container">
+          <ul id="bookList" class="list-group"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-dark py-3 text-white">
+      <div class="container">
+        <div class="text-center">
+          <p>&copy; 2024 Bookish. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let libraryData = [
+        {
+          id: 1,
+          title: 'The Great Gatsby',
+          author: 'F. Scott Fitzgerald',
+          ISBN: '978-0-7432-7356-5',
+          genre: 'Classic',
+          publicationYear: 1925,
+          mediaType: 'Book',
+          availabilityStatus: 'In Stock',
+          location: 'Fiction Section, Shelf A',
+          condition: 'Good',
+        },
+        {
+          id: 2,
+          title: "The Hitchhiker's Guide to the Galaxy",
+          author: 'Douglas Adams',
+          ISBN: '978-0-345-39180-3',
+          genre: 'Science Fiction',
+          publicationYear: 1979,
+          mediaType: 'Book',
+          availabilityStatus: 'Checked Out',
+          location: 'Science Fiction Section, Shelf B',
+          condition: 'New',
+        },
+        {
+          id: 3,
+          title: 'The Beatles Anthology',
+          author: 'The Beatles',
+          ISBN: '978-0811826846',
+          genre: 'Music',
+          publicationYear: 2000,
+          mediaType: 'DVD',
+          availabilityStatus: 'On Hold',
+          location: 'Music Section, Shelf C',
+          condition: 'Fair',
+        },
+        {
+          id: 4,
+          title: 'National Geographic',
+          author: 'Various',
+          ISBN: 'NG-MAG-2023-001',
+          genre: 'Magazine',
+          publicationYear: 2023,
+          mediaType: 'Magazine',
+          availabilityStatus: 'In Stock',
+          location: 'Periodicals Section, Shelf D',
+          condition: 'Good',
+        },
+        {
+          id: 5,
+          title: 'Database Management Essentials',
+          author: 'Abraham Silberschatz',
+          ISBN: '978-0077079611',
+          genre: 'Technology',
+          publicationYear: 2019,
+          mediaType: 'Digital Book',
+          availabilityStatus: 'In Stock',
+          location: 'Technology Section, Shelf E',
+          condition: 'New',
+        },
+      ];
+
+      const bookList = document.querySelector('#bookList');
+      const addBookBtn = document.querySelector('#addBookBtn');
+      const genreFilter = document.querySelector('#genreFilter');
+      const mediaTypeFilter = document.querySelector('#mediaTypeFilter');
+
+      function getData(libraryData) {
+        // console.log(libraryData);
+        bookList.innerHTML = '';
+        if (libraryData) {
+          for (let i = 0; i < libraryData.length; i++) {
+            const listElement = document.createElement('li');
+            listElement.className =
+              'list-group-item d-flex justify-content-between align-items-center';
+
+            const divElement = document.createElement('div');
+
+            const h4 = document.createElement('h4');
+            h4.textContent = `${libraryData[i].title}`;
+
+            const author = document.createElement('p');
+            author.textContent = `Author: ${libraryData[i].author}`;
+
+            const p = document.createElement('p');
+            p.textContent = `Genre: ${libraryData[i].genre}, Media Type: ${libraryData[i].mediaType}`;
+
+            divElement.appendChild(h4);
+            divElement.appendChild(author);
+            divElement.appendChild(p);
+
+            const details = document.createElement('a');
+            details.href = `bookDetails.html?id=${libraryData[i].id}`;
+            details.className = 'btn btn-primary';
+            details.textContent = 'details';
+
+            listElement.appendChild(divElement);
+            listElement.appendChild(details);
+
+            bookList.appendChild(listElement);
+          }
+        }
+      }
+
+      //   add book
+      addBookBtn.addEventListener('click', function () {
+        const title = document.querySelector('#title');
+        const author = document.querySelector('#author');
+        const selectedGenre = document.querySelector('#genreSelect');
+        const selectedMediaType = document.querySelector('#mediaTypeSelect');
+
+        const bookId = libraryData.length + 1;
+        const newBook = {
+          id: bookId,
+          title: title.value,
+          author: author.value,
+          genre: selectedGenre.value,
+          mediaType: selectedMediaType.value,
+        };
+        libraryData.push(newBook);
+        getData(libraryData);
+      });
+
+      //filter by genre
+      genreFilter.addEventListener('change', function () {
+        let genreValue = genreFilter.value;
+        const filteredData = [];
+        console.log(genreValue);
+        if (genreValue === 'All') {
+          getData(libraryData);
+        } else {
+          for (let i = 0; i < libraryData.length; i++) {
+            if (libraryData[i].genre == genreValue) {
+              filteredData.push(libraryData[i]);
+            }
+          }
+          getData(filteredData);
+        }
+      });
+
+      mediaTypeFilter.addEventListener('change', function () {
+        const value = mediaTypeFilter.value;
+        const filteredData = [];
+        if (value === 'All') {
+          getData(libraryData);
+        } else {
+          for (let i = 0; i < libraryData.length; i++) {
+            if (libraryData[i].mediaType == value) {
+              filteredData.push(libraryData[i]);
+            }
+          }
+          getData(filteredData);
+        }
+      });
+
+      getData(libraryData);
+    </script>
+  </body>
+</html>

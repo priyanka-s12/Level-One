@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA1.4_HW2</title>
+  </head>
+
+  <body>
+    <!-- Q & A -->
+    <label for="answerTextarea">What is Javascript?</label>
+    <textarea id="answerTextarea" rows="5" cols="50"></textarea>
+    <button id="displayAnswerBtn">Display Answer</button>
+    <button id="countWordsBtn">Count Words</button>
+    <p id="answer"></p>
+    <p id="result"></p>
+
+    <!-- todos  -->
+    <label for="todosTextarea">List Todos:</label>
+    <textarea id="todosTextarea" rows="5" cols="50"></textarea>
+    <button id="displayTodosBtn">Display Todos</button>
+    <button id="countTodosBtn">Count Todos</button>
+    <p id="todosResult"></p>
+
+    <!-- password -->
+    <label for="passwordInput">Enter password:</label>
+    <input type="text" id="passwordInput" />
+    <button id="displayPasswordBtn">Display Password</button>
+    <button id="checkPasswordBtn">Check Password</button>
+    <p id="passwordResult"></p>
+
+    <script>
+      // Q & A
+      const answerTextarea = document.querySelector('#answerTextarea');
+      const displayAnswerBtn = document.querySelector('#displayAnswerBtn');
+      const countWordsBtn = document.querySelector('#countWordsBtn');
+      const answer = document.querySelector('#answer');
+      const result = document.querySelector('#result');
+
+      displayAnswerBtn.addEventListener('click', function () {
+        const enteredAnswer = answerTextarea.value;
+        answer.textContent = `Your Answer: ${enteredAnswer}`;
+        answer.style.color = 'black';
+        result.textContent = '';
+      });
+
+      countWordsBtn.addEventListener('click', function () {
+        const enteredAnswer = answerTextarea.value;
+
+        const words = enteredAnswer.split(' ');
+
+        if (words.length <= 7) {
+          answer.style.color = 'green';
+
+          result.textContent = 'Good.';
+          result.style.color = 'green';
+        } else {
+          answer.style.color = 'red';
+
+          result.textContent = 'Word count exceeding.';
+          result.style.color = 'red';
+        }
+      });
+
+      // todos
+      const todosTextarea = document.querySelector('#todosTextarea');
+      const displayTodosBtn = document.querySelector('#displayTodosBtn');
+      const countTodosBtn = document.querySelector('#countTodosBtn');
+      const todosResult = document.querySelector('#todosResult');
+
+      displayTodosBtn.addEventListener('click', function () {
+        const todos = todosTextarea.value;
+        todosResult.textContent = `Your Todos: ${todos}`;
+        todosResult.style.color = 'black';
+      });
+
+      countTodosBtn.addEventListener('click', function () {
+        const todosList = todosTextarea.value;
+
+        const todo = todosList.split(',');
+
+        console.log(todo);
+        todosResult.textContent = `Total number of todo: ${todo.length}`;
+        todosResult.style.color = 'green';
+      });
+
+      // Password
+      const passwordInput = document.querySelector('#passwordInput');
+      const displayPasswordBtn = document.querySelector('#displayPasswordBtn');
+      const checkPasswordBtn = document.querySelector('#checkPasswordBtn');
+      const passwordResult = document.querySelector('#passwordResult');
+
+      displayPasswordBtn.addEventListener('click', function () {
+        const password = passwordInput.value;
+        passwordResult.textContent = `Your Password: ${password}`;
+        passwordResult.style.color = 'black';
+      });
+
+      checkPasswordBtn.addEventListener('click', function () {
+        const password = passwordInput.value;
+        const chars = password.split('');
+        const atIndex = password.indexOf('@');
+        const exclaimationIndex = password.indexOf('!');
+        const dollarIndex = password.indexOf('$');
+
+        if (
+          (chars.length > 5 && atIndex > 0) ||
+          exclaimationIndex > 0 ||
+          dollarIndex > 0
+        ) {
+          passwordResult.textContent = 'Password Accepted.';
+          passwordResult.style.color = 'green';
+        } else {
+          passwordResult.textContent = `Invalid Password. Password should be more than 5 characters and must contain @ or ! or $ symbol.`;
+          passwordResult.style.color = 'red';
+        }
+      });
+    </script>
+  </body>
+</html>

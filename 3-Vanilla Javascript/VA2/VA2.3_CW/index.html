@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.3_CW</title>
+  </head>
+
+  <body>
+    <label>Select a Color:</label>
+    <select id="colorSelect">
+      <option value="Red">Red</option>
+      <option value="Yellow">Yellow</option>
+      <option value="Green">Green</option>
+    </select>
+    <p id="colorResult"></p>
+
+    <label>Select a Day:</label>
+    <select id="daySelect">
+      <option value="Sunday">Sunday</option>
+      <option value="Monday">Monday</option>
+      <option value="Thursday">Thursaday</option>
+      <option value="Saturday">Saturday</option>
+    </select>
+    <p id="dayResult"></p>
+
+    <label>Select a Country:</label>
+    <select id="countrySelect">
+      <option value="usa">USA</option>
+      <option value="canada">Canada</option>
+      <option value="mexico">Mexica</option>
+    </select>
+    <p id="countryResult"></p>
+
+    <script>
+      // color
+      const colorSelect = document.getElementById('colorSelect');
+      const colorResult = document.getElementById('colorResult');
+
+      colorSelect.addEventListener('change', function () {
+        const selectedColor = colorSelect.value;
+        // console.log(selectedColor)
+        colorResult.textContent = `You selected: ${selectedColor}`;
+      });
+
+      // day
+      const daySelect = document.getElementById('daySelect');
+      const dayResult = document.getElementById('dayResult');
+
+      daySelect.addEventListener('change', function () {
+        const selectedDay = daySelect.value;
+        // console.log(selectedDay)
+
+        if (selectedDay === 'Sunday' || selectedDay === 'Saturday') {
+          dayResult.textContent = 'It is a Weekend.';
+        } else {
+          dayResult.textContent = 'It is a Weekday.';
+        }
+      });
+
+      // country
+      const countrySelect = document.getElementById('countrySelect');
+      const countryResult = document.getElementById('countryResult');
+
+      countrySelect.addEventListener('change', function () {
+        const selectedCountry = countrySelect.value;
+
+        // create an object
+        const capitals = {
+          usa: 'Washington. D.C',
+          canada: 'Ottawa',
+          mexico: 'Mexico City',
+        };
+
+        countryResult.textContent = `Capital: ${capitals[selectedCountry]}`;
+      });
+    </script>
+  </body>
+</html>

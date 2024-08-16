@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA1.3_HW2</title>
+  </head>
+
+  <body>
+    <label for="bookReviewTextarea">Enter a book review:</label>
+    <textarea id="bookReviewTextarea" rows="5" cols="50"></textarea>
+    <button id="displayBookReviewBtn">Display Book Review</button>
+    <p id="bookReviewResult"></p>
+
+    <label for="bioTextarea">Enter your personal bio:</label>
+    <textarea id="bioTextarea" rows="5" cols="50"></textarea>
+    <button id="displayBioBtn">Display Styled Bio</button>
+    <p id="styledBio"></p>
+
+    <label for="diaryEntryTextarea">Enter your personal diary entry:</label>
+    <textarea id="diaryEntryTextarea" rows="5" cols="50"></textarea>
+    <button id="displayDiaryEntryBtn">Display Diary Entry</button>
+    <p id="diaryEntry"></p>
+
+    <script>
+      // Book Review
+      const bookReviewTextarea = document.getElementById('bookReviewTextarea');
+      const displayBookReviewBtn = document.getElementById(
+        'displayBookReviewBtn'
+      );
+      const bookReviewResult = document.getElementById('bookReviewResult');
+
+      displayBookReviewBtn.addEventListener('click', function () {
+        const bookReview = bookReviewTextarea.value;
+
+        bookReviewResult.textContent = `Your book review: ${bookReview}`;
+      });
+
+      // Styled Bio
+      const bioTextarea = document.getElementById('bioTextarea');
+      const dispplayBioBtn = document.getElementById('displayBioBtn');
+      const styledBio = document.getElementById('styledBio');
+
+      dispplayBioBtn.addEventListener('click', function () {
+        const bio = bioTextarea.value;
+
+        styledBio.innerHTML = `<em>${bio}</em>`;
+      });
+
+      // personal diary
+      const diaryEntryTextarea = document.getElementById('diaryEntryTextarea');
+      const displayDiaryEntryBtn = document.getElementById(
+        'displayDiaryEntryBtn'
+      );
+      const diaryEntry = document.getElementById('diaryEntry');
+
+      displayDiaryEntryBtn.addEventListener('click', function () {
+        const entry = diaryEntryTextarea.value;
+
+        const diaryDateTime = new Date().toLocaleString();
+
+        diaryEntry.innerHTML = `
+      <p><strong>${diaryDateTime}</strong></p>
+      <p>${entry}</p>
+      
+      `;
+      });
+    </script>
+  </body>
+</html>

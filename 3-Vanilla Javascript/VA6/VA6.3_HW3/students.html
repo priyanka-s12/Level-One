@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Students List</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      #loadingContainer {
+        display: none;
+      }
+
+      #successMessage {
+        display: none;
+      }
+
+      #errorMessage {
+        display: none;
+      }
+
+      #fetchFailedMessage {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid mx-3">
+          <a class="navbar-brand fw-medium" href="index.html">
+            Student Management
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="students.html">Student List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addStudent.html">Add Student</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container py-3">
+        <h2 class="mb-3">Student List</h2>
+
+        <div id="loadingContainer" class="bg-primary-subtle p-3 rounded mb-3">
+          Loading...
+        </div>
+
+        <div id="successMessage" class="bg-success-subtle p-3 rounded mb-3">
+          Student detail deleted successfully !
+        </div>
+
+        <div id="errorMessage" class="bg-danger-subtle mb-3 p-3 rounded">
+          An error occured while fetching student details.
+        </div>
+
+        <div id="fetchFailedMessage" class="bg-danger-subtle rounded mb-3 p-3">
+          No students data found.
+        </div>
+
+        <div>
+          <label for="genderSelect" class="form-label">Filter By Gender:</label>
+          <select id="genderSelect" class="form-select">
+            <option value="All">All</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <ul id="studentList" class="list-group mt-3"></ul>
+      </section>
+    </main>
+
+    <script>
+      const loadingContainer = document.querySelector('#loadingContainer');
+      const successMessage = document.querySelector('#successMessage');
+      const errorMessage = document.querySelector('#errorMessage');
+      const fetchFailedMessage = document.querySelector('#fetchFailedMessage');
+
+      const genderSelect = document.querySelector('#genderSelect');
+      const studentList = document.querySelector('#studentList');
+      const apiUrl =
+        'https://student-management-Student-neog.replit.app/students';
+
+      function fetchData() {
+        loadingContainer.style.display = 'block';
+        successMessage.style.display = 'none';
+
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // console.log(data)
+            loadingContainer.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            if (data && data.length > 0) {
+              studentList.innerHTML = '';
+              displayData(data);
+            } else {
+              fetchFailedMessage.style.display = 'block';
+            }
+            deleteData();
+          })
+          .catch(function (error) {
+            errorMessage.style.display = 'block';
+          });
+      }
+
+      function displayData(students) {
+        // console.log(students)
+        for (let i = 0; i < students.length; i++) {
+          const listElement = document.createElement('li');
+          listElement.className =
+            'list-group-item d-flex justify-content-between align-items-center';
+          listElement.innerHTML = `${students[i].name} - Grade: ${students[i].grade} - Age: ${students[i].age} - Attendance: ${students[i].attendance} - Gender: ${students[i].gender} - Marks: ${students[i].marks} <button class='btn btn-danger' id='deleteBtn' data-id='${students[i]._id}'>Delete</button>`;
+
+          // console.log(listElement)
+          studentList.appendChild(listElement);
+        }
+      }
+
+      genderSelect.addEventListener('change', function () {
+        if (genderSelect.value == 'All') {
+          studentList.innerHTML = '';
+          fetchData();
+        } else {
+          filterByGender(genderSelect.value);
+        }
+      });
+
+      function filterByGender(gender) {
+        console.log(gender);
+        const filteredData = [];
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              studentList.innerHTML = '';
+              for (let i = 0; i < data.length; i++) {
+                if (data[i].gender == gender) {
+                  filteredData.push(data[i]);
+                }
+              }
+              displayData(filteredData);
+              deleteData();
+            }
+          });
+      }
+
+      function deleteData() {
+        const deleteBtns = document.querySelectorAll('#deleteBtn');
+        for (let i = 0; i < deleteBtns.length; i++) {
+          console.log(deleteBtns.length);
+          deleteBtns[i].addEventListener('click', function (event) {
+            const studentId = event.target.getAttribute('data-id');
+            console.log(studentId);
+            const deleteApiUrl = `https://student-management-student-neog.replit.app/students/${studentId}`;
+            console.log(deleteApiUrl);
+
+            fetch(deleteApiUrl, {
+              method: 'DELETE',
+            })
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (data) {
+                if (data) {
+                  studentList.innerHTML = '';
+                  successMessage.style.display = 'block';
+                  fetchData();
+                }
+              });
+          });
+        }
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

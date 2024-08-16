@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA1.4_HW1</title>
+  </head>
+
+  <body>
+    <!--age  -->
+    <label for="ageInput">Enter your age:</label>
+    <input type="text" id="ageInput" />
+    <button id="displayAgeBtn">Display Age</button>
+    <button id="checkEligibilityBtn">Check Eligibility</button>
+    <p id="ageResult"></p>
+
+    <!-- student -->
+    <label for="studentInput">Are you a student?</label>
+    <input type="text" id="studentInput" />
+    <button id="displayAnswerBtn">Display Answer</button>
+    <button id="checkStudentEligibilityBtn">Check Eligibility</button>
+    <p id="studentResult"></p>
+
+    <!-- password -->
+    <label for="passwordInput">Enter Password:</label>
+    <input type="text" id="passwordInput" />
+    <button id="displayPasswordBtn">Display Password</button>
+    <button id="checkPasswordBtn">Check Password</button>
+    <p id="passwordResult"></p>
+
+    <script>
+      // age
+      const ageInput = document.querySelector('#ageInput');
+      const displayAgeBtn = document.querySelector('#displayAgeBtn');
+      const checkEligibilityBtn = document.querySelector(
+        '#checkEligibilityBtn'
+      );
+      const ageResult = document.querySelector('#ageResult');
+
+      displayAgeBtn.addEventListener('click', function () {
+        const age = ageInput.value;
+        ageResult.textContent = `Your Age: ${age}`;
+        ageResult.style.color = 'black';
+      });
+
+      checkEligibilityBtn.addEventListener('click', function () {
+        const age = ageInput.value;
+        if (age >= 18) {
+          ageResult.style.color = 'green';
+        } else {
+          ageResult.style.color = 'red';
+        }
+      });
+
+      // student
+      const studentInput = document.querySelector('#studentInput');
+      const displayAnswerBtn = document.querySelector('#displayAnswerBtn');
+      const checkStudentEligibilityBtn = document.querySelector(
+        '#checkStudentEligibilityBtn'
+      );
+      const studentResult = document.querySelector('#studentResult');
+
+      displayAnswerBtn.addEventListener('click', function () {
+        const isStudent = studentInput.value;
+        // console.log(isStudent)
+        studentResult.textContent = `Your Answer: ${isStudent}`;
+        studentResult.style.color = 'black';
+      });
+
+      checkStudentEligibilityBtn.addEventListener('click', function () {
+        const isStudent = studentInput.value;
+        if (isStudent === 'yes' || isStudent === 'Yes' || isStudent === 'YES') {
+          studentResult.textContent = `You are eligible.`;
+          studentResult.style.color = 'green';
+        } else if (
+          isStudent === 'no' ||
+          isStudent === 'No' ||
+          isStudent === 'NO'
+        ) {
+          studentResult.textContent = `You are not eligible.`;
+          studentResult.style.color = 'red';
+        } else {
+          studentResult.textContent = `Invalid answer. Please enter 'Yes' or 'No'.`;
+        }
+      });
+
+      // Password
+      const passwordInput = document.querySelector('#passwordInput');
+      const displayPasswordBtn = document.querySelector('#displayPasswordBtn');
+      const checkPasswordBtn = document.querySelector('#checkPasswordBtn');
+      const passwordResult = document.querySelector('#passwordResult');
+
+      displayPasswordBtn.addEventListener('click', function () {
+        const password = passwordInput.value;
+        // console.log(password)
+        passwordResult.textContent = `Your Password: ${password}`;
+        passwordResult.style.color = 'black';
+      });
+
+      checkPasswordBtn.addEventListener('click', function () {
+        const password = passwordInput.value;
+        const atIndex = password.indexOf('@');
+
+        if (atIndex > 0) {
+          passwordResult.textContent = `Password Accepted.`;
+          passwordResult.style.color = 'green';
+        } else {
+          passwordResult.textContent = `Invalid Password. Password must contain @ symbol.`;
+          passwordResult.style.color = 'red';
+        }
+      });
+    </script>
+  </body>
+</html>

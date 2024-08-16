@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP2.5</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <button id="incrementCount1Btn" type="button">Increment Count 1</button>
+    <button id="incrementCount2Btn" type="button">Increment Count 2</button>
+    <p>
+      Count 1:
+      <span id="incrementCountOne"></span>
+    </p>
+    <p>
+      Count 2:
+      <span id="incrementCountTwo"></span>
+    </p>
+    <p id="result"></p>
+
+    <script>
+      const incrementCount1Btn = document.getElementById('incrementCount1Btn');
+      const incrementCount2Btn = document.getElementById('incrementCount2Btn');
+      const incrementCountOne = document.getElementById('incrementCountOne');
+      const incrementCountTwo = document.getElementById('incrementCountTwo');
+      const result = document.getElementById('result');
+
+      let countOne = 0;
+      let countTwo = 0;
+      incrementCount1Btn.addEventListener('click', () => {
+        countOne++;
+        incrementCountOne.textContent = `${countOne}`;
+        displayResult();
+      });
+
+      incrementCount2Btn.addEventListener('click', () => {
+        countTwo++;
+        incrementCountTwo.textContent = `${countTwo}`;
+        displayResult();
+      });
+
+      const displayResult = () => {
+        if (countOne === countTwo) {
+          result.textContent = 'Count 1 is equal to count 2.';
+        } else if (countOne > countTwo) {
+          result.textContent = 'Count 1 is more than count 2.';
+        } else {
+          result.textContent = 'Count 2 is more than count 1.';
+        }
+      };
+    </script>
+  </body>
+</html>

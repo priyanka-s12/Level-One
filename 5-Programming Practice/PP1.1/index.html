@@ -1,0 +1,47 @@
+<!-- Write a program that generates an array of numbers from 1 to 20. But for every multiple of 3, replace the number with "Fizz", for every multiple of 5, replace the number with "Buzz" and for every multiples of 3 & 5, replace with "FizzBuzz". Display the resulting array on the DOM as an unordered list. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP1.1</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <h1>FizBuzz Program Output</h1>
+    <ul id="unorderedList"></ul>
+
+    <script>
+      const unorderedList = document.getElementById('unorderedList');
+
+      const fizzBuzz = (number) => {
+        const resultArr = [];
+        for (let i = 1; i <= number; i++) {
+          if (i % 3 === 0 && i % 5 === 0) {
+            resultArr.push('FizzBuzz');
+          } else if (i % 3 === 0) {
+            resultArr.push('Fizz');
+          } else if (i % 5 === 0) {
+            resultArr.push('Buzz');
+          } else {
+            resultArr.push(i);
+          }
+        }
+        // console.log(resultArr)
+        displayList(resultArr);
+      };
+
+      const displayList = (arr) => {
+        for (let i = 0; i < arr.length; i++) {
+          const listElement = document.createElement('li');
+          listElement.innerHTML = `${arr[i]}`;
+          // console.log(arr[i])
+          unorderedList.appendChild(listElement);
+        }
+      };
+
+      fizzBuzz(20);
+    </script>
+  </body>
+</html>

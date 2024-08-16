@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP2.4</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <button id="incrementCount1Btn" type="button">Increment Count 1</button>
+    <button id="incrementCount2Btn" type="button">Increment Count 2</button>
+    <p>
+      Count 1:
+      <span id="incrementCountOne">0</span>
+    </p>
+    <p>
+      Count 2:
+      <span id="incrementCountTwo">0</span>
+    </p>
+    <p>
+      Total Count:
+      <span id="totalCount">0</span>
+    </p>
+
+    <script>
+      const incrementCount1Btn = document.getElementById('incrementCount1Btn');
+      const incrementCount2Btn = document.getElementById('incrementCount2Btn');
+      const incrementCountOne = document.getElementById('incrementCountOne');
+      const incrementCountTwo = document.getElementById('incrementCountTwo');
+      const totalCount = document.getElementById('totalCount');
+
+      let total = 0;
+      let countOne = 0;
+      let countTwo = 0;
+
+      incrementCount1Btn.addEventListener('click', () => {
+        countOne++;
+        total++;
+        incrementCountOne.textContent = `${countOne}`;
+        totalCount.textContent = `${total}`;
+      });
+
+      incrementCount2Btn.addEventListener('click', () => {
+        countTwo++;
+        total++;
+        incrementCountTwo.textContent = `${countTwo}`;
+        totalCount.textContent = `${total}`;
+      });
+    </script>
+  </body>
+</html>

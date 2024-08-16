@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.2_HW1</title>
+  </head>
+
+  <body>
+    <!--music genre  -->
+    <label>Program 1: Select a music genre:</label>
+    <br />
+    <input type="radio" name="genre" value="Pop" />
+    Pop
+    <br />
+    <input type="radio" name="genre" value="Rock" />
+    Rock
+    <br />
+    <input type="radio" name="genre" value="Hip-Hop" />
+    Hip-Hop
+    <br />
+    <p id="genreResult"></p>
+
+    <!-- lang preference -->
+    <label>Program 2: Choose a language performance:</label>
+    <br />
+    <input type="radio" name="language" value="English" />
+    English
+    <br />
+    <input type="radio" name="language" value="Spanish" />
+    Spanish
+    <br />
+    <input type="radio" name="language" value="French" />
+    French
+    <br />
+    <p id="languagePreferenceResult"></p>
+
+    <!-- job role -->
+    <label>Program 3: Select a job role:</label>
+    <br />
+    <input type="radio" name="job" value="Developer" />
+    Developer
+    <br />
+    <input type="radio" name="job" value="Designer" />
+    Designer
+    <br />
+    <input type="radio" name="job" value="Manager" />
+    Manager
+    <br />
+    <button id="displaySelectedJobBtn">Display Selected Job Role</button>
+    <p id="jobRoleResult"></p>
+
+    <!-- hobby -->
+    <label>Program 4: Choose a favorite hobby:</label>
+    <br />
+    <input type="radio" name="hobby" value="Reading" />
+    Reading
+    <br />
+    <input type="radio" name="hobby" value="Gardening" />
+    Gardening
+    <br />
+    <input type="radio" name="hobby" value="Sports" />
+    Sports
+    <br />
+    <button id="displaySelectedHobbyBtn">Display Selected Hobby</button>
+    <p id="hobbyResult"></p>
+
+    <!--clothing style  -->
+    <label>Program 5: Select a clothing style:</label>
+    <br />
+    <input type="radio" name="style" value="Casual" />
+    Casual
+    <br />
+    <input type="radio" name="style" value="Formal" />
+    Formal
+    <br />
+    <input type="radio" name="style" value="Sporty" />
+    Sporty
+    <br />
+    <button id="displaySelectedStyleBtn">Display Selected Style</button>
+    <p id="styleResult"></p>
+
+    <script>
+      // music genre
+      const genreRadioButtons = document.getElementsByName('genre');
+      const genreResult = document.getElementById('genreResult');
+
+      for (let i = 0; i < genreRadioButtons.length; i++) {
+        genreRadioButtons[i].addEventListener('change', function () {
+          const selectedGenre = document.querySelector(
+            'input[name="genre"]:checked'
+          ).value;
+          // console.log(selectedGenre)
+          genreResult.textContent = `Selected Music Genre: ${selectedGenre}`;
+        });
+      }
+
+      // lang pref
+      const languageRadioButtons = document.getElementsByName('language');
+      const languagePreferenceResult = document.getElementById(
+        'languagePreferenceResult'
+      );
+
+      for (let i = 0; i < languageRadioButtons.length; i++) {
+        languageRadioButtons[i].addEventListener('change', function () {
+          const selectedLanguage = document.querySelector(
+            'input[name="language"]:checked'
+          ).value;
+          // console.log(selectedLanguage)
+          languagePreferenceResult.textContent = `Selected Language: ${selectedLanguage}`;
+        });
+      }
+
+      // job role
+      const jobRadioButtons = document.getElementsByName('job');
+      const displaySelectedJobBtn = document.getElementById(
+        'displaySelectedJobBtn'
+      );
+      const jobRoleResult = document.getElementById('jobRoleResult');
+
+      displaySelectedJobBtn.addEventListener('click', function () {
+        let selectedJob = document.querySelector('input[name="job"]:checked');
+        //returns selected input field
+        // console.log(selectedJob)
+        if (selectedJob == null) {
+          jobRoleResult.textContent = 'Please select a job role.';
+        } else {
+          jobRoleResult.textContent = `Selected Job Role: ${selectedJob.value}`;
+        }
+      });
+
+      // hobby
+      const hobbyRadioButtons = document.getElementsByName('hobby');
+      const displaySelectedHobbyBtn = document.getElementById(
+        'displaySelectedHobbyBtn'
+      );
+      const hobbyResult = document.getElementById('hobbyResult');
+      // let selectedHobby = ''
+
+      displaySelectedHobbyBtn.addEventListener('click', function () {
+        const selectedHobby = document.querySelector(
+          'input[name="hobby"]:checked'
+        );
+        // console.log(selectedHobby)
+
+        if (selectedHobby == null) {
+          hobbyResult.textContent = 'Please select a hobby';
+        } else {
+          hobbyResult.textContent = `Selected Hobby: ${selectedHobby.value}`;
+        }
+      });
+
+      // for (let i = 0; i < hobbyRadioButtons.length; i++) {
+      //   hobbyRadioButtons[i].addEventListener('change', function () {
+      //     selectedHobby = document.querySelector('input[name="hobby"]:checked').value
+      //   })
+      // }
+
+      // displaySelectedHobbyBtn.addEventListener('click', function () {
+      //   if (selectedHobby) {
+      //     hobbyResult.textContent = `${selectedHobby}`
+      //   } else {
+      //     hobbyResult.textContent = 'plz select'
+      //   }
+      // })
+
+      //undefined case
+      // displaySelectedHobbyBtn.addEventListener('click', function(){
+      //   let selectedHobby = ''
+      //   for(let i = 0; i < hobbyRadioButtons.length; i++){
+      //     if(hobbyRadioButtons[i].checked){
+      //       selectedHobby = hobbyRadioButtons[i].value
+      //     }
+      //   }
+      //   if(selectedHobby){
+      //     hobbyResult.textContent = `${selectedHobby}`
+      //   }else{
+      //     hobbyResult.textContent = "plz select"
+      //   }
+      // })
+
+      // clothing style
+      const styleRadioButtons = document.getElementsByName('style');
+      const displaySelectedStyleBtn = document.getElementById(
+        'displaySelectedStyleBtn'
+      );
+      const styleResult = document.getElementById('styleResult');
+
+      displaySelectedStyleBtn.addEventListener('click', function () {
+        const selectedStyle = document.querySelector(
+          'input[name="style"]:checked'
+        );
+        // console.log(selectedStyle)
+
+        if (selectedStyle == null) {
+          styleResult.textContent = 'Please select a clothing style.';
+        } else {
+          styleResult.textContent = `Selected Clothing Style: ${selectedStyle.value}`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>PP2.1</title>
+    <style>
+      #validateField {
+        margin-top: 1rem;
+        display: none;
+      }
+      #section1Div {
+        margin-top: 1rem;
+        background-color: #7dd3fc;
+      }
+      #section2Div {
+        background-color: #86efac;
+      }
+    </style>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <label>Enter Color:</label>
+    <input type="text" id="colorInput" placeholder="e.g. #00ff00" />
+    <button id="section1Btn" type="button">Change Color Section 1</button>
+    <button id="section2Btn" type="button">Change Color Section 2</button>
+    <div id="validateField">
+      Invalid color format. Please enter a valid color. (e.g. #00ff00)
+    </div>
+    <div id="section1Div">Section 1</div>
+    <div id="section2Div">Section 2</div>
+
+    <script>
+      const colorInput = document.getElementById('colorInput');
+      const section1Btn = document.getElementById('section1Btn');
+      const section2Btn = document.getElementById('section2Btn');
+      const validateField = document.getElementById('validateField');
+      const section1Div = document.getElementById('section1Div');
+      const section2Div = document.getElementById('section2Div');
+
+      section1Btn.addEventListener('click', () => {
+        const colorCode = colorInput.value;
+        changeColor(colorCode, section1Div);
+      });
+
+      section2Btn.addEventListener('click', () => {
+        const colorCode = colorInput.value;
+        changeColor(colorCode, section2Div);
+      });
+
+      // const changeColor = colorCode =>{
+      //   console.log(colorCode)
+      //   if(colorCode === ''){
+      //     validateField.style.display = 'block'
+      //   }else{
+      //     validateField.style.display = 'none'
+      //     section1Div.style.backgroundColor = colorCode
+      //   }
+      // }
+
+      const changeColor = (colorCode, section) => {
+        if (colorCode === '') {
+          validateField.style.display = 'block';
+        } else {
+          validateField.style.display = 'none';
+          section.style.backgroundColor = colorCode;
+        }
+      };
+    </script>
+  </body>
+</html>

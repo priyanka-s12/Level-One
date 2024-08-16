@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA5.5_CW</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Todo App</h1>
+
+    <h2>Show Todos</h2>
+    <button id="getTodosBtn">Get Todos</button>
+    <ul id="listTodos"></ul>
+    <div id="getTodoContainer"></div>
+
+    <form id="todoForm">
+      <label for="title">Title:</label>
+      <br />
+      <input type="text" id="title" />
+      <br />
+      <br />
+      <label for="completedTodo">Completed</label>
+      <input type="checkbox" id="completedTodo" />
+      <br />
+      <br />
+      <button>Add Todo</button>
+      <br />
+      <br />
+    </form>
+    <div id="postContainer"></div>
+
+    <script>
+      const todoForm = document.querySelector('#todoForm');
+      const title = document.querySelector('#title');
+      const completedTodo = document.querySelector('#completedTodo');
+      const postContainer = document.querySelector('#postContainer');
+      const apiUrl = 'https://todos-student-neog.replit.app/todos';
+      const getTodosBtn = document.querySelector('#getTodosBtn');
+      const listTodos = document.querySelector('#listTodos');
+      const getTodoContainer = document.querySelector('#getTodoContainer');
+
+      getTodosBtn.addEventListener('click', function () {
+        listTodos.innerHTML = '';
+
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // console.log(data)
+            if (data) {
+              for (let i = 0; i < data.length; i++) {
+                const listElements = document.createElement('li');
+                listElements.textContent = `${data[i].title} (Completed: ${data[i].completed})`;
+                listTodos.appendChild(listElements);
+              }
+            } else {
+              getTodoContainer.textContent = 'Failed  to fetch todos.';
+            }
+          })
+          .catch(function (error) {
+            getTodoContainer.textContent =
+              'An error occured while getting the todos.';
+          });
+      });
+
+      todoForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const todoData = {
+          title: title.value,
+          completed: completedTodo.checked,
+        };
+
+        fetch(apiUrl, {
+          method: 'POST',
+          body: JSON.stringify(todoData),
+          headers: {
+            'content-type': 'application/json',
+          },
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              postContainer.textContent = 'Todo added successfully.';
+            } else {
+              postContainer.textContent = 'Failed to add todo.';
+            }
+          })
+          .catch(function (error) {
+            postContainer.textContent = 'An error occured while adding todo.';
+          });
+      });
+    </script>
+  </body>
+</html>

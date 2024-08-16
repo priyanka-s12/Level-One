@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA2.3_HW1</title>
+  </head>
+
+  <body>
+    <!--movie genre  -->
+    <label>Choose a movie genre:</label>
+    <select id="genreSelect">
+      <option value="Action">Action</option>
+      <option value="Comedy">Comedy</option>
+      <option value="Drama">Drama</option>
+    </select>
+    <p id="movieResult"></p>
+
+    <!--weather  -->
+    <label>Select a weather condition:</label>
+    <select id="weatherSelect">
+      <option value="Sunny">Sunny</option>
+      <option value="Rainy">Rainy</option>
+      <option value="Snowy">Snowy</option>
+    </select>
+    <p id="activitySuggestionResult"></p>
+
+    <!-- language -->
+    <label>Select a language:</label>
+    <select id="languageSelect">
+      <option value="english">English</option>
+      <option value="spanish">Spanish</option>
+      <option value="french">French</option>
+    </select>
+    <button id="displayGreetingBtn">Display Greeting</button>
+    <p id="greetingResult"></p>
+
+    <!-- instrument -->
+    <label>Choose a musical instrumnet:</label>
+    <select id="instrumentSelect">
+      <option value="piano">Piano</option>
+      <option value="guitar">Guitar</option>
+      <option value="violin">Violin</option>
+    </select>
+    <button id="displayFunFactBtn">Display Fun Fact</button>
+    <p id="funFactResult"></p>
+
+    <!--pet  -->
+    <label>Select a pet:</label>
+    <select id="petSelect">
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+      <option value="fish">Fish</option>
+    </select>
+    <button id="displayPetDescriptionBtn">Display Pet Description</button>
+    <p id="petDescriptionResult"></p>
+
+    <script>
+      // movie genre
+      const genreSelect = document.getElementById('genreSelect');
+      const movieResult = document.getElementById('movieResult');
+
+      genreSelect.addEventListener('change', function () {
+        const selectedGenre = genreSelect.value;
+        // console.log(selectedGenre)
+
+        const movies = {
+          Action: 'The Dark Knight',
+          Comedy: 'Superbad',
+          Drama: 'The Shawshank Redemption',
+        };
+
+        movieResult.textContent = `Recommended ${selectedGenre} Movie: ${movies[selectedGenre]}`;
+      });
+
+      // weather
+      const weatherSelect = document.getElementById('weatherSelect');
+      const activitySuggestionResult = document.getElementById(
+        'activitySuggestionResult'
+      );
+
+      weatherSelect.addEventListener('change', function () {
+        const selectedWeather = weatherSelect.value;
+        // console.log(selectedWeather)
+        const activity = {
+          Sunny: 'Movie day indoors',
+          Rainy: 'Picnic in the park',
+          Snowy: 'Build a snowman',
+        };
+        if (selectedWeather === 'Sunny' || selectedWeather === 'Snowy') {
+          activitySuggestionResult.textContent = `Outdoor Activity Suggestion: ${activity[selectedWeather]}`;
+        } else {
+          activitySuggestionResult.textContent = `Activity Suggestion: ${activity[selectedWeather]}`;
+        }
+      });
+
+      // language
+      const languageSelect = document.getElementById('languageSelect');
+      const displayGreetingBtn = document.getElementById('displayGreetingBtn');
+      const greetingResult = document.getElementById('greetingResult');
+
+      //one event inside another event
+      // languageSelect.addEventListener('change', function () {
+      //   const selectedLanguage = languageSelect.value
+      //   // console.log(selectedLanguage)
+      //   const greetings = {
+      //     english: 'Hello!',
+      //     spanish: 'Hola!',
+      //     french: 'Bonjour!'
+      //   }
+      //   displayGreetingBtn.addEventListener('click', function () {
+      //     greetingResult.textContent = `Common Greeting: ${greetings[selectedLanguage]}`
+      //   })
+      // })
+
+      displayGreetingBtn.addEventListener('click', function () {
+        const selectedLanguage = languageSelect.value;
+        // console.log(selectedLanguage)
+
+        const greetings = {
+          english: 'Hello!',
+          spanish: 'Hola!',
+          french: 'Bonjour!',
+        };
+        greetingResult.textContent = `Common Greeting: ${greetings[selectedLanguage]}`;
+      });
+
+      // instrument
+      const instrumentSelect = document.getElementById('instrumentSelect');
+      const displayFunFactBtn = document.getElementById('displayFunFactBtn');
+      const funFactResult = document.getElementById('funFactResult');
+
+      displayFunFactBtn.addEventListener('click', function () {
+        const selectedInstrument = instrumentSelect.value;
+        // console.log(selectedInstrument)
+
+        const funFact = {
+          piano: 'The piano has 88 keys.',
+          guitar:
+            'The guitar is one of the most popular instruments in the world.',
+          violin:
+            'The violin is a string instrument known for its sweet sound.',
+        };
+        funFactResult.textContent = `Fun Fact: ${funFact[selectedInstrument]}`;
+      });
+
+      // pet
+      const petSelect = document.getElementById('petSelect');
+      const displayPetDescriptionBtn = document.getElementById(
+        'displayPetDescriptionBtn'
+      );
+      const petDescriptionResult = document.getElementById(
+        'petDescriptionResult'
+      );
+
+      displayPetDescriptionBtn.addEventListener('click', function () {
+        const selectedPet = petSelect.value;
+        // console.log(selectedPet)
+
+        const petDescription = {
+          dog: 'Dogs are loyal and friendly companions.',
+          cat: 'Cats are independent and playful.',
+          fish: 'Fish are low-maintenance and peaceful pets.',
+        };
+
+        petDescriptionResult.textContent = `Pet Description: ${petDescription[selectedPet]}`;
+      });
+    </script>
+  </body>
+</html>

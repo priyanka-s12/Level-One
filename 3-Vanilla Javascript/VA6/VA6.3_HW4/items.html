@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Items List</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      #loadingContainer {
+        display: none;
+      }
+
+      #errorMessage {
+        display: none;
+      }
+
+      #successContainer {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary py-3">
+        <div class="container-fluid mx-4">
+          <a class="navbar-brand fw-medium" href="index.html">
+            Inventory Management
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="items.html">Item List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addItems.html">Add Items</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container py-3">
+        <h2>Item List</h2>
+
+        <div
+          id="loadingContainer"
+          class="bg bg-primary-subtle p-3 mb-3 rounded"
+        >
+          Loading...
+        </div>
+        <div id="errorMessage" class="bg bg-danger-subtle p-3 mb-3 rounded">
+          An error occured while fetching items.
+        </div>
+        <div
+          id="successContainer"
+          class="bg bg-success-subtle p-3 mb-3 rounded"
+        >
+          Item detail deleted successfully !
+        </div>
+
+        <label for="categoryFilter" class="form-label">
+          Filter by Category:
+        </label>
+        <select id="categoryFilter" class="form-select">
+          <option value="All">All</option>
+          <option value="Perishable">Perishable</option>
+          <option value="Non-Perishable">Non-Perishable</option>
+        </select>
+
+        <ul id="itemList" class="list-group mt-3"></ul>
+      </section>
+    </main>
+
+    <script>
+      const apiUrl =
+        'https://inventory-management-student-neog-ca.replit.app/inventory';
+      const itemList = document.querySelector('#itemList');
+      const categorySelect = document.querySelector('#categoryFilter');
+
+      const loadingContainer = document.querySelector('#loadingContainer');
+      const errorMessage = document.querySelector('#errorMessage');
+      const successContainer = document.querySelector('#successContainer');
+
+      function fetchData() {
+        loadingContainer.style.display = 'block';
+        successContainer.style.display = 'none';
+        errorMessage.style.display = 'none';
+
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              loadingContainer.style.display = 'none';
+              itemList.innerHTML = '';
+              displayData(data);
+            }
+            deleteData();
+          })
+          .catch(function (error) {
+            errorMessage.style.display = 'block';
+          });
+      }
+
+      function displayData(items) {
+        // console.log(items)
+        for (let i = 0; i < items.length; i++) {
+          const listElement = document.createElement('li');
+          listElement.className =
+            'list-group-item d-flex justify-content-between align-items-center';
+          listElement.innerHTML = `
+        ${items[i].itemName} - Quantity: ${items[i].quantity} - Category: ${items[i].category} <button id='deleteBtn' class='btn btn-danger' data-id=${items[i]._id}>Delete</button>`;
+          // console.log(listElement)
+          itemList.appendChild(listElement);
+        }
+      }
+
+      categorySelect.addEventListener('change', function () {
+        if (categorySelect.value === 'All') {
+          itemList.innerHTML = '';
+          fetchData();
+        } else {
+          filterItemsByCategory(categorySelect.value);
+        }
+      });
+
+      function filterItemsByCategory(categoryName) {
+        console.log(categoryName);
+        const filteredData = [];
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (data) {
+              itemList.innerHTML = '';
+              for (let i = 0; i < data.length; i++) {
+                if (data[i].category == categoryName) {
+                  filteredData.push(data[i]);
+                  // console.log(filteredData)
+                }
+              }
+              displayData(filteredData);
+              deleteData();
+            }
+          });
+      }
+
+      function deleteData() {
+        const deleteBtns = document.querySelectorAll('#deleteBtn');
+        for (let i = 0; i < deleteBtns.length; i++) {
+          console.log(deleteBtns.length);
+          deleteBtns[i].addEventListener('click', function (event) {
+            const itemId = event.target.getAttribute('data-id');
+            // console.log(itemId)
+            const deleteApiUrl = `https://inventory-management-student-neog-ca.replit.app/inventory/${itemId}`;
+            // console.log(deleteApiUrl)
+            fetch(deleteApiUrl, {
+              method: 'DELETE',
+            })
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (data) {
+                if (data) {
+                  itemList.innerHTML = '';
+                  successContainer.style.display = 'block';
+                  fetchData();
+                }
+              });
+          });
+        }
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

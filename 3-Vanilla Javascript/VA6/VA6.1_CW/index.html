@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA6.1_CW</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <h1>Student List</h1>
+    <ul id="studentList"></ul>
+
+    <script>
+      const studentList = document.querySelector('#studentList');
+      const apiUrl =
+        'https://student-management-student-neog.replit.app/students';
+
+      function fetchData() {
+        studentList.textContent = 'Loading...';
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            // console.log(data)
+            if (data) {
+              studentList.textContent = '';
+              for (let i = 0; i < data.length; i++) {
+                const liElements = document.createElement('li');
+                liElements.textContent = `${data[i].name} - ${data[i].grade}`;
+                studentList.appendChild(liElements);
+              }
+            }
+          })
+          .catch(function (error) {
+            studentList.textContent =
+              'An error occured while fetching the students.';
+          });
+      }
+
+      fetchData();
+    </script>
+  </body>
+</html>

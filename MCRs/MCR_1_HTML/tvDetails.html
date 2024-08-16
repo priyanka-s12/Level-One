@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TV Details</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <h1><a href="index.html">TVZone</a></h1>
+
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tv.html">TVs</a></li>
+          <li><a href="tvBrands.html">TV Brands</a></li>
+          <li><a href="report.html">Report</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>TV Details</h2>
+      <section id="tvDetail"></section>
+
+      <br />
+      <br />
+    </main>
+
+    <footer>
+      <p>&copy; 2023 TVZone. All rights reserved.</p>
+    </footer>
+
+    <script>
+      let televisions = [
+        {
+          id: '1',
+          name: 'Smart LED TV',
+          model: 'LED123',
+          detail: 'A feature-rich Smart LED TV with high-definition display.',
+          manufacturer: 'TechVision',
+          year: 2022,
+          screenType: 'LED',
+          size: 55,
+          resolution: '4K',
+          price: 80000,
+        },
+        {
+          id: '2',
+          name: 'Curved OLED TV',
+          model: 'OLED456',
+          detail: 'Immersive entertainment with a curved OLED display.',
+          manufacturer: 'VisionX',
+          year: 2023,
+          screenType: 'OLED',
+          size: 65,
+          resolution: '8K',
+          price: 120000,
+        },
+        {
+          id: '3',
+          name: 'Ultra HD QLED TV',
+          model: 'QLED789',
+          detail: 'QLED technology for vibrant colors and superior clarity.',
+          manufacturer: 'ColorTech',
+          year: 2021,
+          screenType: 'QLED',
+          size: 75,
+          resolution: '4K',
+          price: 150000,
+        },
+      ];
+
+      //1st get the id from url
+
+      function getTVId(id) {
+        let url = new URL(window.location.href);
+        // console.log(url.searchParams.get(id))
+        return url.searchParams.get(id);
+      }
+
+      let TVId = getTVId('id');
+
+      //2nd fetch that id data from db
+      let tvObject;
+      for (let i = 0; i < televisions.length; i++) {
+        if (televisions[i].id === TVId) {
+          tvObject = televisions[i];
+        }
+      }
+      // console.log(tvObject)
+
+      //3rd if obj found, display that data on the page
+      let tvDetailElement = document.getElementById('tvDetail');
+      // console.log(tvDetailElement)
+      if (tvObject) {
+        tvDetailElement.innerHTML = `
+      <h3>${tvObject.name}</h3>
+      <ul>
+      <li>Model: ${tvObject.model}</li>
+      <li>Detail: ${tvObject.detail}</li>
+      <li>Manufacturer: ${tvObject.manufacturer}</li>
+      <li>Screen Type: ${tvObject.screenType}</li>
+      <li>Resolution: ${tvObject.resolution}</li>
+      <li>Year: ${tvObject.year}</li>
+      <li>Price: ${tvObject.price}</li>
+      </ul>
+      `;
+      } else {
+        tvDetailElement.innerHTML = `
+      <p>TV not found.</p>
+      `;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Food Details</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-dark py-3" data-bs-theme="dark">
+        <div class="container">
+          <a href="index.html" class="navbar-brand text-light fw-medium">
+            Food Database
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="dishes.html" class="nav-link">Dishes</a>
+              </li>
+              <li class="nav-item">
+                <a href="report.html" class="nav-link">Food Report</a>
+              </li>
+              <li class="nav-item">
+                <a href="cookingTips.html" class="nav-link">Cooking Tips</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="py-4">
+      <section>
+        <div class="container mb-3">
+          <h2>Food Details</h2>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <section id="foodDetail"></section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-dark text-light py-3">
+      <div class="container">
+        <p>&copy; 2024 Food Comapany. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      let dishes = [
+        {
+          id: '1',
+          dishName: 'Pizza',
+          cuisine: 'Italian',
+          ingredients: 'Dough, Tomato sauce, Cheese, Toppings',
+          details: 'A delicious Italian dish with a variery of toppings.',
+        },
+        {
+          id: '2',
+          dishName: 'Sushi',
+          cuisine: 'Japanese',
+          ingredients: 'RIce, fish, seaweed, vegetables',
+          details:
+            'A Japanese dish of prepared vinegared rice, usually with some sugar and salt, plus a variety of ingredients, such as vegetables, and any meat, but most commonly seafood. .',
+        },
+        {
+          id: '3',
+          dishName: 'Tacos',
+          cuisine: 'Mexican',
+          ingredients: 'Tortillas, meat, salsa, toppings',
+          details:
+            'A traditional Mexican dish consisting of a small hand-sized corn- or wheat-based tortilla topped with a filling.  The tortilla is then folded around the filling and eaten by hand.',
+        },
+        {
+          id: '4',
+          dishName: 'Pasta Carbonara',
+          cuisine: 'Italian',
+          ingredients: 'Pasta, eggs, cheese, becon',
+          details:
+            'It is just spaghetti made with pancetta or bacon, eggs, Parmesan, a little olive oil, salt and pepper.',
+        },
+        {
+          id: '5',
+          dishName: 'Chocolate Cake',
+          cuisine: 'Dessert',
+          ingredients: 'Flour, sugar,  cocoa, eggs, chocolate',
+          details:
+            'Whenever you feel down or are not in a good mood, you turn to the chocolate cake as your comfort food.',
+        },
+        {
+          id: '6',
+          dishName: 'Biryani',
+          cuisine: 'Indian',
+          ingredients: 'Rice, meat, spices, vegetables',
+          details:
+            'It is delicious and almost like a one pot meal that is enjoyed by families and eaten together like a celebration!',
+        },
+      ];
+
+      //1st get the id from url
+      function getDishId(id) {
+        let url = new URL(window.location.href);
+        // console.log(url.searchParams.get(id))
+        return url.searchParams.get(id);
+      }
+      let dishID = getDishId('id');
+
+      //2nd get that id data from db
+      let dishObj;
+      for (let i = 0; i < dishes.length; i++) {
+        if (dishes[i].id === dishID) {
+          dishObj = dishes[i];
+        }
+      }
+      // console.log(dishObj)
+      //3rd if obj found, display that details on the view
+      let foodDetailElement = document.getElementById('foodDetail');
+      // console.log(foodDetailElement)
+      if (dishObj) {
+        foodDetailElement.innerHTML = `
+        <h3 class='fs-4'>${dishObj.dishName}</h3>
+        <p><strong>Cuisine: </strong>${dishObj.cuisine}</p>
+        <p><strong>Ingredients: </strong>${dishObj.ingredients}</p>
+        <p><strong>Details: </strong>${dishObj.details}</p>
+        
+        `;
+      } else {
+        foodDetailElement.innerHTML = `
+        <p>Dish not found</p>
+        `;
+      }
+    </script>
+  </body>
+</html>

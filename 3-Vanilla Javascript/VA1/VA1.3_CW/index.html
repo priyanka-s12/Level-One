@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VA1.3_CW</title>
+  </head>
+
+  <body>
+    <label for="feedbackTextarea">Give your feedback:</label>
+    <textarea id="feedbackTextarea" rows="4" cols="50"></textarea>
+    <button id="feedbackSubmitBtn">Submit</button>
+    <p id="feedbackResult"></p>
+
+    <label for="addressTextarea">Enter your address:</label>
+    <textarea id="addressTextarea" rows="5" cols="50"></textarea>
+    <button id="addressBtn">Display Address</button>
+    <p id="addressResult"></p>
+
+    <label for="descriptionTextarea">Enter a description:</label>
+    <textarea id="descriptionTextarea" rows="5" cols="50"></textarea>
+    <button id="displayDescriptionBtn">Display Description</button>
+    <p id="descriptionResult"></p>
+
+    <script>
+      // feedback
+      const feedbackTextarea = document.getElementById('feedbackTextarea');
+      const feedbackSubmitBtn = document.getElementById('feedbackSubmitBtn');
+      const feedbackResult = document.getElementById('feedbackResult');
+
+      feedbackSubmitBtn.addEventListener('click', function () {
+        const feedback = feedbackTextarea.value;
+        // console.log(feedback)
+        feedbackResult.textContent = `Feedback: ${feedback}`;
+      });
+
+      //address
+      const addressTextarea = document.getElementById('addressTextarea');
+      const addressBtn = document.getElementById('addressBtn');
+      const addressResult = document.getElementById('addressResult');
+
+      addressBtn.addEventListener('click', function () {
+        const address = addressTextarea.value;
+        addressResult.textContent = `Your address: ${address}`;
+      });
+
+      //description
+      const descriptionTextarea = document.getElementById(
+        'descriptionTextarea'
+      );
+      const displayDescriptionBtn = document.getElementById(
+        'displayDescriptionBtn'
+      );
+      const descriptionResult = document.getElementById('descriptionResult');
+
+      displayDescriptionBtn.addEventListener('click', function () {
+        const description = descriptionTextarea.value;
+        descriptionResult.textContent = `Your Description: ${description}`;
+      });
+    </script>
+  </body>
+</html>

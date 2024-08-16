@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Food Details</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="dishes.html">Dishes</a></li>
+          <li><a href="report.html">Food Report</a></li>
+          <li><a href="cookingTips.html">Cooking Tips</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Food Details</h2>
+      <section id="foodDetail"></section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Food Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+      let dishes = [
+        {
+          id: '1',
+          dishName: 'Pizza',
+          cuisine: 'Italian',
+          ingredients: 'Dough, Tomato sauce, Cheese, Toppings',
+          details: 'A delicious Italian dish with a variery of toppings.',
+        },
+        {
+          id: '2',
+          dishName: 'Sushi',
+          cuisine: 'Japanese',
+          ingredients: 'RIce, fish, seaweed, vegetables',
+          details:
+            'A Japanese dish of prepared vinegared rice, usually with some sugar and salt, plus a variety of ingredients, such as vegetables, and any meat, but most commonly seafood. .',
+        },
+        {
+          id: '3',
+          dishName: 'Tacos',
+          cuisine: 'Mexican',
+          ingredients: 'Tortillas, meat, salsa, toppings',
+          details:
+            'A traditional Mexican dish consisting of a small hand-sized corn- or wheat-based tortilla topped with a filling.  The tortilla is then folded around the filling and eaten by hand.',
+        },
+        {
+          id: '4',
+          dishName: 'Pasta Carbonara',
+          cuisine: 'Italian',
+          ingredients: 'Pasta, eggs, cheese, becon',
+          details:
+            'It is just spaghetti made with pancetta or bacon, eggs, Parmesan, a little olive oil, salt and pepper.',
+        },
+        {
+          id: '5',
+          dishName: 'Chocolate Cake',
+          cuisine: 'Dessert',
+          ingredients: 'Flour, sugar,  cocoa, eggs, chocolate',
+          details:
+            'Whenever you feel down or are not in a good mood, you turn to the chocolate cake as your comfort food.',
+        },
+        {
+          id: '6',
+          dishName: 'Biryani',
+          cuisine: 'Indian',
+          ingredients: 'Rice, meat, spices, vegetables',
+          details:
+            'It is delicious and almost like a one pot meal that is enjoyed by families and eaten together like a celebration!',
+        },
+      ];
+
+      //1st get the id from url
+      function getDishId(id) {
+        let url = new URL(window.location.href);
+        // console.log(url.searchParams.get(id))
+        return url.searchParams.get(id);
+      }
+      let dishID = getDishId('id');
+
+      //2nd get that id data from db
+      let dishObj;
+      for (let i = 0; i < dishes.length; i++) {
+        if (dishes[i].id === dishID) {
+          dishObj = dishes[i];
+        }
+      }
+      // console.log(dishObj)
+      //3rd if obj found, display that details on the view
+      let foodDetailElement = document.getElementById('foodDetail');
+      // console.log(foodDetailElement)
+      if (dishObj) {
+        foodDetailElement.innerHTML = `
+        <h3>${dishObj.dishName}</h3>
+        <p><strong>Cuisine: </strong>${dishObj.cuisine}</p>
+        <p><strong>Ingredients: </strong>${dishObj.ingredients}</p>
+        <p><strong>Details: </strong>${dishObj.details}</p>
+        
+        `;
+      } else {
+        foodDetailElement.innerHTML = `
+        <p>Dish not found</p>
+        `;
+      }
+    </script>
+  </body>
+</html>
