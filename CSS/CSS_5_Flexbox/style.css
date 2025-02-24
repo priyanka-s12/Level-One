@@ -1,0 +1,43 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.col {
+  border: 1px solid black;
+  background-color: aquamarine;
+  padding: 0.5rem;
+}
+
+.nav-items {
+  list-style: none;
+  border: 1px solid black;
+  padding: 0.5rem;
+  background-color: blanchedalmond;
+  flex-grow: 1;
+}
+.cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.card {
+  border: 1px solid black;
+  max-width: 250px;
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.alignedRow {
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.end {
+  align-self: flex-end;
+}

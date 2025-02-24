@@ -1,0 +1,107 @@
+h1 {
+  text-decoration: underline;
+}
+
+/* body {
+  background-color: yellow;
+  font-size: 14px;
+}
+
+@media (min-width: 600px) {
+  body {
+    background-color: white;
+    font-size: 20px;
+  }
+} */
+
+/* body {
+  background-color: aqua;
+}
+@media (max-width: 800px) {
+  body {
+    background-color: yellow;
+  }
+} */
+
+/* @media (width: 720px) {
+  body {
+    background-color: white;
+  }
+} */
+
+/* Q1 when the screen width is 800px or smaller otherwise it should remain white*/
+/* body {
+  background-color: aqua;
+}
+@media (max-width: 800px) {
+  body {
+    background-color: lightgrey;
+  }
+} */
+
+/* Q2 when the screen width is at least 900px wide*/
+@media (min-width: 900px) {
+  h1 {
+    font-size: 30px;
+  }
+}
+
+/* Q3 hide it when screen size ia t 600px or narrower*/
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+/* Q4 when the screen height is greater than 700px*/
+@media (min-height: 700px) {
+  p {
+    color: blue;
+  }
+}
+
+/* Q5 when the screen width is larger than 1000px*/
+@media (min-width: 1000px) {
+  header {
+    background-color: green;
+  }
+}
+
+/* Q6 have a maximum height of 500px ->can write  height<=500px*/
+@media (max-height: 500px) {
+  body {
+    font-size: 12px;
+  }
+}
+
+/* Q7 when the screen width is exactly 1024px otherwise it should be left aligned by default*/
+@media (width: 1024px) {
+  footer {
+    text-align: center;
+  }
+}
+
+/* Q8 have a width of 80% when the screen width is smaller than 400px*/
+.container {
+  border: 1px solid black;
+}
+@media (max-width: 400px) {
+  .container {
+    width: 80%;
+  }
+}
+
+/* Q9 when the screen width is between 600px and 900px*/
+@media (min-width: 600px) and (max-width: 900px) {
+  p {
+    font-size: 16px;
+    color: yellow;
+  }
+}
+
+/* Q10 when the screen width is greater than or equal to 1000px*/
+@media (min-width: 1000px) {
+  a {
+    color: orange;
+  }
+}

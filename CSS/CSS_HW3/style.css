@@ -1,0 +1,191 @@
+.container {
+  width: 300px;
+  height: 300px;
+  background-color: lightgray;
+  display: flex;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+}
+
+.box-one {
+  align-self: center;
+}
+
+.container-two {
+  justify-content: center;
+}
+
+.box-two {
+  align-self: center;
+}
+
+.unordered-list {
+  display: flex;
+  list-style: none;
+  padding-inline-start: 0;
+  flex-wrap: wrap;
+}
+
+.list-item {
+  border: 1px solid black;
+  background-color: lightyellow;
+  padding: 0.5rem;
+  flex-grow: 1;
+}
+
+.profile-card {
+  width: 200px;
+  border: 1px solid red;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.profile-image {
+  border-radius: 50%;
+}
+
+.profile-designation {
+  margin: 0.2rem 0;
+}
+
+.course-card {
+  border: 1px solid lightgrey;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-title {
+  align-self: center;
+  font-family: sans-serif;
+}
+
+.enroll-btn {
+  background-color: lightgoldenrodyellow;
+  padding: 0.5rem;
+  border: none;
+}
+
+.product-card {
+  border: 1px solid lightgray;
+  padding: 1rem;
+  box-sizing: border-box;
+  max-width: 400px;
+  display: flex;
+  gap: 1rem;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-name {
+  margin-block-start: 0;
+}
+
+.product-description {
+  margin-block-start: 0;
+}
+.buy-btn {
+  background-color: #0080ff;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+}
+
+.testimonial-card {
+  border: 1px solid lightgray;
+  max-width: 400px;
+  padding: 1rem;
+}
+
+.testinomial-person {
+  display: flex;
+  gap: 1rem;
+}
+
+.testinomial-person-image {
+  border-radius: 50%;
+}
+
+.pricing-card {
+  border: 1px solid lightgray;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.basic-plan {
+  margin-block-end: 0;
+  margin-bottom: 0.5rem;
+}
+.plan-price {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  color: orange;
+  font-size: 1.75rem;
+}
+
+hr {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: lightgrey;
+}
+
+.plan-description {
+  margin: 0;
+  text-align: center;
+}
+
+.buy-now-btn {
+  background-color: orange;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+footer {
+  background-color: palevioletred;
+  color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+
+.col {
+  min-width: 200px;
+}
+
+.footer-link {
+  margin: 0;
+}

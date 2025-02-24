@@ -1,0 +1,16 @@
+h1 {
+  color: green;
+}
+#para1 {
+  color: darkcyan;
+}
+.headingTwo {
+  color: brown;
+  font-style: italic;
+}
+
+/* a:hover {
+  font-weight: 600;
+} */
+
+/*This is a comment*/

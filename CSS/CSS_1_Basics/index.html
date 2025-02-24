@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS</title>
+    <link href="./style.css" rel="stylesheet" />
+    <style>
+      /* h1 {
+        color: green;
+        font-size: 16px;
+      }
+      p {
+        color: palevioletred;
+      } */
+      /* #heading {
+        color: green;
+      }
+      #para1 {
+        color: darkmagenta;
+      } */
+      :root {
+        --primary-color: purple;
+      }
+      .submit {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 10px;
+        box-sizing: border-box;
+        width: 200px;
+      }
+      .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .centered-container {
+        max-width: 600px;
+        margin: auto;
+      }
+      .link {
+        text-decoration: none;
+      }
+      .link-primary {
+        border: 2px solid var(--primary-color);
+        background-color: var(--primary-color);
+        border-radius: 0.5rem;
+        color: white;
+        padding: 10px;
+      }
+      .link-secondary {
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        padding: 10px;
+        border-radius: 0.5rem;
+      }
+      .list-non-bullet {
+        list-style: none;
+      }
+      .list-item-inline {
+        display: inline;
+        padding: 0rem 0.5rem;
+      }
+      .navigation {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1rem;
+      }
+      .nav-brand {
+        font-weight: bold;
+      }
+      .nav-pills {
+        text-align: right;
+      }
+      .navigation .link {
+        color: white;
+      }
+      .navigation .link-active {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1 style="color: darkblue; font-size: 30px">Hello, I am learning CSS.</h1>
+    <p style="color: palevioletred; font-size: 20px">
+      This is a paragraph tag.
+    </p> -->
+    <h1 id="heading">Hello, I am learning CSS.</h1>
+    <p id="para1">This is a paragraph tag.</p>
+    <h2 class="headingTwo">This is heading</h2>
+
+    <a href="">Click here to submit</a>
+
+    <div>
+      <button class="submit">Submit</button>
+      <button>Edit</button>
+    </div>
+
+    <div class="container">This is a container</div>
+    <div class="container centered-container">This is a centered container</div>
+
+    <a href="/" class="link link-primary">Primary</a>
+    <a href="/" class="link link-secondary">Secondary</a>
+
+    <h2>Lists</h2>
+    <ul class="list-non-bullet">
+      <li>Item One</li>
+      <li>Item Two</li>
+      <li>Item Three</li>
+    </ul>
+
+    <h3>Inline Lists</h3>
+    <ul class="list-non-bullet">
+      <li class="list-item-inline">Item One</li>
+      <li class="list-item-inline">Item Two</li>
+      <li class="list-item-inline">Item Three</li>
+    </ul>
+
+    <h3>Reversed ordered list</h3>
+    <ol reversed>
+      <li>Item One</li>
+      <li>Item Two</li>
+      <li>Item Three</li>
+    </ol>
+
+    <h3>Navbar</h3>
+    <nav class="container navigation">
+      <div class="nav-brand">Brand Name</div>
+      <ul class="list-non-bullet nav-pills">
+        <li class="list-item-inline">
+          <a href="/" class="link link-active">Item One</a>
+        </li>
+        <li class="list-item-inline">
+          <a href="/products" class="link">Item Two</a>
+        </li>
+        <li class="list-item-inline">
+          <a href="/contacts" class="link">Item Three</a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  --secondary-color: grey;
+}
+
+nav {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.unordered-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.list-item {
+  list-style: none;
+  /* border: 1px solid white; */
+  padding: 0.5rem;
+  margin: 0 1rem;
+}
+
+.subscribe-btn {
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  font-size: 15px;
+  border-radius: 0.5rem;
+}
+
+.cover-image {
+  background-color: black;
+  height: 250px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.img-one {
+  width: 100px;
+  margin-bottom: 0.5rem;
+}
+
+.section-one {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  max-width: 1400px;
+  margin: auto;
+  gap: 5rem;
+  margin-bottom: 3rem;
+}
+
+.container-one {
+  max-width: 700px;
+  box-sizing: border-box;
+}
+.img-two {
+  width: 100%;
+  height: auto;
+}
+
+.container-two {
+  padding: 1rem;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.info {
+  color: blue;
+  font-size: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.welcome {
+  font-size: 25px;
+  margin-bottom: 2rem;
+}
+
+.ghost-description {
+  color: var(--secondary-color);
+  line-height: 25px;
+  font-size: 18px;
+}
+
+.small-logo {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.container-three {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.blog-date,
+.blog-read {
+  color: var(--secondary-color);
+  margin-top: 0.25rem;
+}
+
+.hr-style {
+  width: 100%;
+  margin: auto;
+}
+
+.section-two,
+.section-three {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  padding: 3rem 0;
+  gap: 2rem;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.section-two-container {
+  box-sizing: border-box;
+  max-width: 400px;
+}
+
+.img-container {
+  /* max-width: 400px; */
+  box-sizing: border-box;
+}
+
+.post-img {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-title {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.post-spacing {
+  margin-bottom: 1rem;
+}
+
+.section-three-container {
+  box-sizing: border-box;
+  max-width: 600px;
+}

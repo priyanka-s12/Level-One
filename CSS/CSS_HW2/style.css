@@ -1,0 +1,85 @@
+.list {
+  font-weight: bold;
+}
+
+.itemTwo {
+  position: relative;
+  left: 30px;
+}
+
+.itemThree {
+  position: relative;
+  left: 60px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: lightgray;
+  display: inline-block;
+}
+
+.boxTwo {
+  position: relative;
+  top: 30px;
+}
+
+.boxThree {
+  position: relative;
+  top: 60px;
+}
+
+.container {
+  height: 300px;
+  width: 300px;
+  background-color: lightgray;
+  position: relative;
+}
+
+.pink-box {
+  height: 150px;
+  width: 150px;
+  background-color: lightpink;
+  padding: 5px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.text {
+  margin: 0;
+}
+
+.main-box {
+  border: 2px solid black;
+  display: inline-block;
+}
+
+.box-div {
+  display: inline-block;
+}
+
+.box-one {
+  background-color: lightpink;
+  padding: 8px;
+}
+
+.box-two {
+  width: 200px;
+  height: 300px;
+  background-color: lightgray;
+  padding: 10px;
+}
+
+.outer-box {
+  border: 2px solid black;
+  display: inline-block;
+}
+
+.inner-box {
+  width: 100px;
+  height: 100px;
+  background-color: lightgray;
+  display: inline-block;
+  padding: 10px;
+}
